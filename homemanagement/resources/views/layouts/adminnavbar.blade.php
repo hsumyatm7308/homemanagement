@@ -4,15 +4,16 @@
     <div class="flex h-full text-gray-600 dark:text-gray-400">
       <a href="#"
         class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">Company</a>
-      <a href="#"
+      <a href="{{route('users.index')}}"
         class="cursor-pointer h-full border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white inline-flex mr-8 items-center">Users</a>
-      <a href="#" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">Expense
-        Centres</a>
+      <a href="{{route('dailycosts.index')}}" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center mr-8">Daily Cost</a>
       <a href="#" class="cursor-pointer h-full border-b-2 border-transparent inline-flex items-center">Currency
         Exchange</a>
     </div>
     <div class="ml-auto flex items-center space-x-7">
-      <button class="h-8 px-3 rounded-md shadow text-white bg-blue-500">Deposit</button>
+      <a href="{{route('dailycosts.create')}}">
+        <button class="h-8 px-3 rounded-md shadow text-white bg-blue-500">Create</button>
+      </a>
 
       <button class="flex items-center relative" onclick="document.getElementById('modal').classList.toggle('hidden');">
         <span class="relative flex-shrink-0">
