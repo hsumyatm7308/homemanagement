@@ -16,6 +16,8 @@
   </div>
   <!-- partial -->
 
+  @include('layouts.adminfooter')
+
 </body>
 
 </html>
