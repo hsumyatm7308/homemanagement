@@ -9,7 +9,7 @@
 body {
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 13px;
-  background-color: #e0e1dd;
+  /* background-color: #e0e1dd; */
 }
 
 a {
@@ -163,7 +163,6 @@ body.show-nav>.right-pannels {
 }
 
 .right-pannels h6 {
-  background-color: steelblue;
   color: #fff;
   padding: 10px;
 }
