@@ -48,7 +48,7 @@
 
                 <div class="col-span-2 flex justify-end space-x-4 p-2">
                       <a type="" ><button class="bg-[#1b263b] px-4 py-3">Cancle</button></a>
-                      <button type="submit" class="bg-[#e0e1dd] text-black px-4 py-3">Create</button>
+                      <button type="submit" class="bg-[rgb(59 130 246 / 0.5)] text-black px-4 py-3">Create</button>
                 </div>
             
             
