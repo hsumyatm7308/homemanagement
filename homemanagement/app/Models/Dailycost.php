@@ -8,4 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Dailycost extends Model
 {
     use HasFactory;
+
+    protected $table = 'dailycosts';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'image',
+        'name',
+        'remark',
+        'amount',
+        'category_id',
+        'user_id'
+
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

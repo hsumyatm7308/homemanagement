@@ -1,66 +1,119 @@
+@extends('layouts.adminindex')
+@section('caption',"Create Post")
+@section('content')
 
-@extends('layouts.adminuserindex')
+<!--Start Page Content Area-->
 
-@section('usercontent')
+<div class="container-fluid mt-5">
 
-<div class="container mx-auto text-[#e0e1dd]">
-    <div>
-        <div class="px-2 py-10">
-            <h1 class="text-2xl">Create Daily Cost</h1>
-        </div>
-        <form action="" method="POST">
-           <div class="grid grid-cols-2 gap-4 ">
+    <div class="col-md-12">
 
-            <div class="flex flex-col p-2">
-                <label for="image" class="gallery">Choose Image</label>
+        <form action="/dailycosts" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('POST')
 
-                <input type="file" name="image" id="image" class="form-control form-control-lg rounded-0"
-                    placeholder="Enter your image" value="{{old('image')}}" hidden />
-            </div>
-                
-                <div class="flex flex-col p-2">
-                    <label for="goods" class="mb-2">Goods</label>
-                    <input type="text" name="goods" id="goods" class="p-3 bg-[#1b263b]" placeholder="goods">
+            <div class="row">
+
+                <div class="col-md-4">
+
+                    <div class="row">
+
+                        <div class="col-md-12 form-group mb-3">
+                            <label for="image" class="gallery">Choose Image</label>
+
+                            <input type="file" name="image" id="image" class="form-control form-control-lg rounded-0"
+                                placeholder="Enter your image" value="{{old('image')}}" hidden />
+                        </div>
+
+                           
+                   
+
+                    </div>
+
                 </div>
 
-                <div class="flex flex-col p-2">
-                    <label for="costs" class="mb-2">Cost</label>
-                    <input type="text" name="costs" id="costs" class="p-3 bg-[#1b263b]" placeholder="goods">
-                </div>
-            
-                <div class="col-span-2 flex flex-col p-2">
-                    <label for="remark" class="mb-2">Remark</label>
-                    <textarea name="remark" id="remark" cols="30" rows="10" class="p-3 bg-[#1b263b]" placeholder="Type..."></textarea>
+                <div class="col-md-8">
+
+                    <div class="row">
+
+
+                      
+
+                        <div class="col-md-6 form-group mb-3">
+                            <label for="name"> Type <span class="text-danger">*</span></label>
+                            <input type="text" name="name" id="name" class="form-control form-control-sm rounded-0"
+                                placeholder="Enter your Title name" value="{{old('name')}}" />
+                        </div>
+
+
+                        <div class="col-md-6 form-group mb-3">
+
+                            <label for="amount"> Amount <span class="text-danger">*</span>
+                            </label>
+
+                            <input type="number" name="amount" id="amount" class="form-control form-control-sm rounded-0"
+                                placeholder="Class fee" value="{{old('fee')}}" />
+
+                        </div>
+                        <div class="col-md-12 form-group mb-3">
+
+                            <label for="remark"> Remark <span class="text-danger">*</span>
+                            </label>
+
+                            <textarea name="remark" id="remark" class="form-control form-control-lg rounded-0"
+                                rows="5" placeholder="Say Something...">{{old('content')}}</textarea>
+
+                        </div> 
+
+
+
+                        <div class="col-md-3 form-group">
+
+                            <label for="category_id"> Categroy <span class="text-danger">*</span>
+                            </label>
+
+                            {{-- <select name="category_id" id="category_id" class="form-control form-control-sm rounded"> --}}
+
+                                {{-- @foreach($tags as $tag)
+                                <option value="{{$tag->id}}">{{$tag->name}}</option>
+                                @endforeach --}}
+
+                            {{-- </select> --}}
+
+                            <input type="text" name="category_id" id="category_id" class="form-control form-control-sm rounded-0"
+                                placeholder="Enter your Title name" value="{{old('name')}}" />
+
+                        </div>
+
+
                     
-                </div>
-                <div class="flex flex-col p-2">
-                    <label for="tag_id" class="mb-2">Tag</label>
-                    <input type="text" name="tag_id" id="tag_id" class="p-3 bg-[#1b263b]" placeholder="goods">
-                </div>
 
-              
+                        <div class="col-md-3 d-flex justify-content-end align-items-end">
 
-                <div class="flex flex-col p-2">
-                    <label for="date" class="mb-2">Date</label>
-                    <input type="date" name="date" id="date" class="p-3 bg-[#1b263b]" placeholder="goods">
-                </div>
+                            <a href="{{route('dailycosts.index')}}" class="btn btn-secondary btn-sm rounded-0">Cancel</a>
+                            <button type="submit" class="btn btn-info btn-sm rounded-0 ms-3">Submit</button>
+
+                        </div>
 
 
-                <div class="col-span-2 flex justify-end space-x-4 p-2">
-                      <a type="" ><button class="bg-[#1b263b] px-4 py-3">Cancle</button></a>
-                      <button type="submit" class="bg-[rgb(59 130 246 / 0.5)] text-black px-4 py-3">Create</button>
+                    </div>
+
                 </div>
-            
-            
-            
-           </div>
+
+            </div>
+
         </form>
+
     </div>
+
 </div>
 
+<!--End Page Content Area-->
 
 @endsection
-@section('css')
+
+@section('style')
+
 <style type="text/css">
     /* summernote css1  */
     .gallery {
@@ -96,7 +149,15 @@
 @endsection
 
 @section('script')
-<script>
+// summernote css1 js1
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+<script type="text/javascript">
+
+
     $(document).ready(function () {
         // console.log("hi")
 

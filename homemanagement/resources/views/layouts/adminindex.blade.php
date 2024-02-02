@@ -10,12 +10,12 @@
   @include('layouts.adminleftside')
 
 	<!--Start Content Area-->
-	<section>
+	<section class="mt-5">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-10 col-md-9 ms-auto">
             
-          @yield('content')
+                  @yield('content')
 
 
 

@@ -14,21 +14,20 @@
 										class="nav-link text-white p-3 mb-2 sidebarlinks"><i
 											class="fas fa-tachometer-alt fa-lg me-3"></i>Dashboard</a></li>
 
-								<li class="nav-item"><a href="javascript:void(0);"
-										class="nav-link text-white p-3 mb-2 sidebarlinks currents"
-										data-bs-target="#pagelayout" data-bs-toggle="collapse"><i
-											class="fas fa-file-alt fa-lg me-3"></i>Insert<i
-											class="fas fa-angle-left mores"></i></a>
+								<li class="nav-item">
+									<a href="javascript:void(0);" class="nav-link text-white p-3 mb-2 sidebarlinks currents" data-bs-target="#pagelayout" data-bs-toggle="collapse">
+										<i class="fas fa-file-alt fa-lg me-3"></i>Insert
+										<i class="fas fa-angle-left mores"></i></a>
 
-									<ul id="pagelayout" class="collapse ps-2">
-										<li>
-                      <a href="javascript:void(0);" class="nav-link text-white sidebarlinks">
-                          <i class="fas fa-layer-group mx-3"></i>
-													<span>Daily Cost</span>
-                        </a>
-                    </li>
+									   <ul id="pagelayout" class="collapse ps-2">
+									    	<li>
+                                               <a href="{{route('dailycosts.index')}}" class="nav-link text-white sidebarlinks">
+                                                   <i class="fas fa-layer-group mx-3"></i>
+								                   <span>Daily Cost</span>
+                                               </a>
+                                            </li>
 									
-									</ul>
+								    	</ul>
 
 								</li>
 
