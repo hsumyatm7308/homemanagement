@@ -115,8 +115,9 @@ class DailycostsController extends Controller
         return redirect(route('dailycosts.index'));
     }
 
-    public function show()
+    public function show($id)
     {
-        return view('dailycosts.show');
+        $dailycost = Dailycost::findOrFail($id);
+        return view('dailycosts.show')->with("dailycost", $dailycost);
     }
 }
