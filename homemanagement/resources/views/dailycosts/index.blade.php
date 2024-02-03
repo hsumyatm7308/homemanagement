@@ -4,7 +4,7 @@
 @section('content')
   <section class="container-fluid mt-5">
 
-
+  
     <div>
         <a href="{{route('dailycosts.create')}}" class="btn btn-primary">
           <span>Create</span>
@@ -47,9 +47,21 @@
               <td><button class="btn btn-sm">{{$dailycost->updated_at->format('d-M-Y')}}</button></td>
               <td class="d-flex ">
                  <a href="{{route('dailycosts.edit',$dailycost->id)}}"><button class=" btn btn-sm px-3">Edit</button></a>
-                 <button type="button" class="btn btn-sm btn-danger px-3 " data-bs-toggle="modal" data-bs-target="#deletemodal">Del</button>
+                 <button type="button" class="btn btn-sm btn-danger px-3 deleteform" data-bs-toggle="modal" data-bs-target="#deletemodal" data-id = "{{$dailycost->id}}">Del</button>
               </td>
+
+              <form id="formdelete-{{$dailycost->id}}" action="{{route('dailycosts.destroy',$dailycost -> id)}}" method="POST">
+                @csrf 
+                @method('DELETE')
+               
+              </form>
+             
             </tr>
+
+
+
+
+
             @endforeach
          
           </tbody>
@@ -60,29 +72,56 @@
   </section>
 
 
-  <div class="modal fade" id="deletemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-       <div class="modal-content">
-       
-          <div class="modal-body mx-auto p-5">
-              <h3> Are you sure delete this item? </h3>
-          </div>
-          <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Delete</button>
-          </div>
-       </div>
-       
- 
-    </div>
- </div>
 @endsection
+
+<div class="modal fade" id="deletemodal" tabindex="-1"  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+       
+        <div class="modal-body mx-auto p-5">
+            <h3> Are you sure delete this item? </h3>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button id="delete-btns" type="submit" class="btn btn-primary delete-btns" data-delid="">Delete</button>
+        </div>
+
+        
+  
+       
+    </div>
+    
+
+  </div>
+</div>
 
 
 
 @section('script')
 
-    
+<script type="text/javascript">
 
+  $(document).ready(function(){
+
+    $(document).on('click', '.deleteform', function() {
+
+    let getid = $(this).attr('data-id');
+
+    $('.delete-btns').attr('data-delid', getid);
+
+    let getdelid = $('.delete-btns').attr('data-delid');
+
+    $('#delete-btns').click(function(){
+      if(getid == getdelid){
+      $(`#formdelete-${getid}`).submit();
+    }
+    })
+  });
+
+
+  });
+
+
+</script>
 
 @endsection

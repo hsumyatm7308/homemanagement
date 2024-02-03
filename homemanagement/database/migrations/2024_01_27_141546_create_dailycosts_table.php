@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->decimal('amount');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('user_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
