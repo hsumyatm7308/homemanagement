@@ -125,18 +125,15 @@
 
 								<li class="nav-item"><a href="javascript:void(0);"
 										class="nav-link text-white p-3 mb-2 sidebarlinks" data-bs-target="#chartelement"
-										data-bs-toggle="collapse"><i class="fas fa-file-alt fa-lg me-3"></i>Charts<i
+										data-bs-toggle="collapse"><i class="fas fa-file-alt fa-lg me-3"></i>Fix Analysis<i
 											class="fas fa-angle-left mores"></i></a>
 
 									<ul id="chartelement" class="collapse ps-2">
 										<li><a href="javascript:void(0);" class="nav-link text-white sidebarlinks"><i
-													class="fas fa-long-arrow-alt-right me-4"></i>Pie Chart</a></li>
-										<li><a href="javascript:void(0);" class="nav-link text-white sidebarlinks"><i
-													class="fas fa-long-arrow-alt-right me-4"></i>Map Chart</a></li>
-										<li><a href="javascript:void(0);" class="nav-link text-white sidebarlinks"><i
-													class="fas fa-long-arrow-alt-right me-4"></i>Line Chart</a></li>
-										<li><a href="javascript:void(0);" class="nav-link text-white sidebarlinks"><i
-													class="fas fa-long-arrow-alt-right me-4"></i>Chart Js</a></li>
+													class="fas fa-long-arrow-alt-right me-4"></i>Status</a></li>
+										<li><a href="{{route('categories.index')}}" class="nav-link text-white sidebarlinks"><i
+													class="fas fa-long-arrow-alt-right me-4"></i>Category</a></li>
+								
 
 									</ul>
 

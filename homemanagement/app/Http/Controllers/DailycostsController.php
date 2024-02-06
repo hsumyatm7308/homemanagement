@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Dailycost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,7 @@ class DailycostsController extends Controller
     public function create()
     {
         $data['dailycosts'] = Dailycost::orderBy('name', 'asc')->get();
+        $data['categories'] = Category::all()->pluck('title', 'id');
         return view('dailycosts.create', $data);
     }
 
@@ -67,7 +69,8 @@ class DailycostsController extends Controller
     public function edit(string $id)
     {
         $dailycost = Dailycost::findOrFail($id);
-        return view('dailycosts.edit', ['dailycost' => $dailycost]);
+        $categories = Category::all()->pluck("title", "id");
+        return view('dailycosts.edit', ['dailycost' => $dailycost, "categories" => $categories]);
     }
 
     public function update(Request $request, $id)

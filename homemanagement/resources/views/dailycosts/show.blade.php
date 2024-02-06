@@ -72,13 +72,13 @@
                             <label for="category_id"> Categroy <span class="text-danger">*</span>
                             </label>
 
-                            {{-- <select name="category_id" id="category_id" class="form-control form-control-sm rounded"> --}}
+                            {{-- <select name="category_id" id="category_id" class="form-control form-control-sm rounded">
 
-                                {{-- @foreach($tags as $tag)
-                                <option value="{{$tag->id}}">{{$tag->name}}</option>
-                                @endforeach --}}
+                                @foreach($categories as $id => $title)
+                                <option value="{{$id}}">{{$title}}</option>
+                                @endforeach
 
-                            {{-- </select> --}}
+                            </select> --}}
 
                             <input type="text" name="category_id" id="category_id" class="form-control form-control-sm rounded-0"
                                 placeholder="Enter your Title name" value="{{$dailycost->category_id}}" />

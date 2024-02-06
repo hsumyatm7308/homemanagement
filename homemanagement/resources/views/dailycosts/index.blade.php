@@ -16,7 +16,7 @@
         <table class="table table-striped">
 
           <thead>
-            <tr>
+            <tr class="table-primary">
               <th scope="col">No</th>
               <th scope="col">Type</th>
               <th scope="col">Category</th>
@@ -33,12 +33,15 @@
           <tbody>
           @foreach($dailycosts as $idx => $dailycost)
 
-            <tr>
+            <tr class="mb-5">
               <th scope="row"><button class="btn btn-sm">{{++$idx}}</button></th>
               <td><img src="{{asset($dailycost -> image)}}" class="rounded-circle " width="20" height="20" /> <a href="{{route('dailycosts.show',$dailycost->id)}}" class="ms-2">{{Str::limit($dailycost->name,20)}}</a></td>
 
-              <td><button class="btn btn-sm">{{$dailycost->category_id}}</button></td>
-              {{-- <td><button class="btn btn-sm">{{$dailycost->category->name}}</button></td> --}}
+              <td><button class="btn btn-sm">
+                @if ($dailycost->category)
+                  {{ $dailycost->category->title }}
+                @endif
+            </button></td>
               <td><button class="btn btn-sm">{{$dailycost->amount}}</button></td>
 
               <td><button class="btn btn-sm">{{$dailycost->user['name']}}</button></td>
@@ -46,7 +49,7 @@
               <td><button class="btn btn-sm">{{Str::limit($dailycost->remark,30)}}</button></td>
               <td><button class="btn btn-sm">{{$dailycost->updated_at->format('d-M-Y')}}</button></td>
               <td class="d-flex ">
-                 <a href="{{route('dailycosts.edit',$dailycost->id)}}"><button class=" btn btn-sm px-3">Edit</button></a>
+                 <a href="{{route('dailycosts.edit',$dailycost->id)}}"><button class="text-primary btn btn-sm px-3">Edit</button></a>
                  <button type="button" class="btn btn-sm btn-danger px-3 deleteform" data-bs-toggle="modal" data-bs-target="#deletemodal" data-id = "{{$dailycost->id}}">Del</button>
               </td>
 
