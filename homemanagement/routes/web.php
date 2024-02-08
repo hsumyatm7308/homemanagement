@@ -31,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('/dailycosts', DailycostsController::class);
+    // Route::get('/filter', [DailycostsController::class, 'filter'])->name('dailycosts.filter');
     Route::resource('/categories', CategoriesController::class);
 });
 

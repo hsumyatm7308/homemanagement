@@ -18,19 +18,18 @@
         </div>
        
         <div>
-          <form action="" method="">
-             <div class="from-group">
-               <select name="" id="" class="border-info form-control form-control-sm rounded-0">
-                  <option selected disabled>Choose duration
-                    <i class="fas fa-chevron-down"></i>
-                   </option>
-                  <option value="">Last Week</option>
-                  <option value="">Lass Month</option>
-                  <option value="">Last 3 Months</option>
-               </select>
+          <form action="">
+            <div class="form-group">
+                <select name="duration" id="duration" class="border-info form-control form-control-sm rounded-0 duration">
+                    <option value="">Choose duration</option>
+                    <option value="lastweek" class="lastweek">Last Week</option>
+                    <option value="lastmonth">Last Month</option>
+                    <option value="last3months">Last 3 Months</option>
+                </select>
+            </div>
 
-             </div>
-          </form>
+        </form>
+        
         </div>
   
 
@@ -104,10 +103,17 @@
        
 
       <div class="d-flex justify-content-end mt-5">
-        {{ $dailycosts->links('pagination::default') }}
-      </div>
+        {{ $dailycosts->appends(request()->only('filter'))->links('pagination::default') }}
+     </div>
+    
      
       {{-- php artisan vendor:publish --tag=laravel-pagination --}}
+
+
+
+
+    
+
 
   </section>
 
@@ -143,6 +149,7 @@
 
   $(document).ready(function(){
 
+    // Start Delete Form 
     $(document).on('click', '.deleteform', function() {
 
     let getid = $(this).attr('data-id');
@@ -155,11 +162,26 @@
       if(getid == getdelid){
       $(`#formdelete-${getid}`).submit();
     }
+    });
+
+
+    });
+    // End Delete form 
+
+
+
+
+
+  });
+
+
+    // Start Duration 
+    document.getElementById('duration').addEventListener('click',function(){
+      var getfilterid = this.value;
+      window.location.href = window.location.href.split('?')[0] + "?filter="+getfilterid
     })
-  });
+    // End Duration 
 
-
-  });
 
 
 </script>
