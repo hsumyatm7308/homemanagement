@@ -7,12 +7,14 @@ use App\Models\Dailycost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use Illuminate\Support\Facades\File;
+
 class DailycostsController extends Controller
 {
     //
     public function index()
     {
-        $data['dailycosts'] = Dailycost::orderBy('id', 'desc')->get();
+        $data['dailycosts'] = Dailycost::orderBy('id', 'desc')->paginate(10);
         return view('dailycosts.index', $data);
     }
 
@@ -86,7 +88,7 @@ class DailycostsController extends Controller
         $user = Auth::user();
         $user_id = $user['id'];
 
-        $dailycost = new Dailycost();
+        $dailycost = Dailycost::findOrFail($id);
 
 
         $dailycost->name = $request['name'];
@@ -97,6 +99,12 @@ class DailycostsController extends Controller
         $dailycost->user_id = $user_id;
 
         // remove old image 
+        if ($request->hasFile('image')) {
+            $path = $dailycost->image;
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+        }
 
 
         // for image 

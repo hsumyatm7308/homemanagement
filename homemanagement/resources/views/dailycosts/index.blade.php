@@ -5,11 +5,38 @@
   <section class="container-fluid mt-5">
 
   
-    <div>
-        <a href="{{route('dailycosts.create')}}" class="btn btn-primary">
-          <span>Create</span>
-        </a>
-    </div>
+  
+
+  
+      <div class="d-flex justify-content-between mt-5">
+   
+
+        <div>
+          <a href="{{route('dailycosts.create')}}" class="btn btn-primary rounded-0">
+            <span>Create</span>
+          </a>  
+        </div>
+       
+        <div>
+          <form action="" method="">
+             <div class="from-group">
+               <select name="" id="" class="border-info form-control form-control-sm rounded-0">
+                  <option selected disabled>Choose duration
+                    <i class="fas fa-chevron-down"></i>
+                   </option>
+                  <option value="">Last Week</option>
+                  <option value="">Lass Month</option>
+                  <option value="">Last 3 Months</option>
+               </select>
+
+             </div>
+          </form>
+        </div>
+  
+
+
+
+      </div>
 
 
       <div class="mt-5">
@@ -70,8 +97,18 @@
           </tbody>
 
         </table>
- 
+
+
       </div>
+
+       
+
+      <div class="d-flex justify-content-end mt-5">
+        {{ $dailycosts->links('pagination::default') }}
+      </div>
+     
+      {{-- php artisan vendor:publish --tag=laravel-pagination --}}
+
   </section>
 
 

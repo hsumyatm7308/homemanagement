@@ -10,7 +10,7 @@
 
         <form action="/dailycosts/{{$dailycost->id}}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('PUT')
+            @method('PATCH')
 
             <div class="row">
 
@@ -71,7 +71,6 @@
 
                         </div> 
 
-                        {{-- <div id="content" name="content"></div> --}}
 
 
                         <div class="col-md-3 form-group">
@@ -87,8 +86,7 @@
 
                             </select>
 
-                            {{-- <input type="text" name="category_id" id="category_id" class="form-control form-control-sm rounded-0"
-                                placeholder="Enter your Title name" value="{{$dailycost->category_id}}" /> --}}
+            
 
                         </div>
 
