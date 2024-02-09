@@ -47,6 +47,7 @@ class DailycostsController extends Controller
             }
         }
 
+
         return view('dailycosts.index', $data);
     }
 
@@ -171,4 +172,6 @@ class DailycostsController extends Controller
         $dailycost->delete();
         return redirect()->back();
     }
+
+
 }

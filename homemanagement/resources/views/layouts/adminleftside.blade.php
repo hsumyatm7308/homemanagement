@@ -38,8 +38,8 @@
 											class="fas fa-angle-left mores"></i></a>
 
 									<ul id="sidebarlayout" class="collapse ps-2">
-										<li><a href="javascript:void(0);" class="nav-link text-white sidebarlinks"><i
-													class="fas fa-long-arrow-alt-right me-4"></i>Compact Menu</a></li>
+										<li><a href="{{route('trashes.index')}}" class="nav-link text-white sidebarlinks"><i
+													class="fas fa-trash-alt me-4"></i>Trash</a></li>
 										<li><a href="javascript:void(0);" class="nav-link text-white sidebarlinks"><i
 													class="fas fa-long-arrow-alt-right me-4"></i>Icon Menu</a></li>
 										<li><a href="javascript:void(0);" class="nav-link text-white sidebarlinks"><i

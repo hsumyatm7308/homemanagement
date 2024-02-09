@@ -12,9 +12,7 @@
    
 
         <div>
-          <a href="{{route('dailycosts.create')}}" class="btn btn-primary rounded-0">
-            <span>Create</span>
-          </a>  
+            <button class="btn btn-primary rounded-0">Delete All</button>
         </div>
        
         <div>
@@ -57,29 +55,29 @@
           </thead>
 
           <tbody>
-          @foreach($dailycosts as $idx => $dailycost)
+          @foreach($trashes as $idx => $trash)
 
             <tr class="mb-5">
               <th scope="row"><button class="btn btn-sm">{{++$idx}}</button></th>
-              <td><img src="{{asset($dailycost -> image)}}" class="rounded-circle " width="20" height="20" /> <a href="{{route('dailycosts.show',$dailycost->id)}}" class="ms-2">{{Str::limit($dailycost->name,20)}}</a></td>
+              <td><img src="{{asset($trash -> image)}}" class="rounded-circle " width="20" height="20" /> <a href="{{route('trashes.show',$trash->id)}}" class="ms-2">{{Str::limit($trash->name,20)}}</a></td>
 
               <td><button class="btn btn-sm">
-                @if ($dailycost->category)
-                  {{ $dailycost->category->title }}
+                @if ($trash->category)
+                  {{ $trash->category->title }}
                 @endif
             </button></td>
-              <td><button class="btn btn-sm">{{$dailycost->amount}}</button></td>
+              <td><button class="btn btn-sm">{{$trash->amount}}</button></td>
 
-              <td><button class="btn btn-sm">{{$dailycost->user['name']}}</button></td>
-              <td><button class="btn btn-sm">{{$dailycost->created_at->format('d-M-Y')}}</button></td>
-              <td><button class="btn btn-sm">{{Str::limit($dailycost->remark,30)}}</button></td>
-              <td><button class="btn btn-sm">{{$dailycost->updated_at->format('d-M-Y')}}</button></td>
+              <td><button class="btn btn-sm">{{$trash->user['name']}}</button></td>
+              <td><button class="btn btn-sm">{{$trash->created_at->format('d-M-Y')}}</button></td>
+              <td><button class="btn btn-sm">{{Str::limit($trash->remark,30)}}</button></td>
+              <td><button class="btn btn-sm">{{$trash->updated_at->format('d-M-Y')}}</button></td>
               <td class="d-flex ">
-                 <a href="{{route('dailycosts.edit',$dailycost->id)}}"><button class="text-primary btn btn-sm px-3">Edit</button></a>
-                 <button type="button" class="btn btn-sm btn-danger px-3 deleteform" data-bs-toggle="modal" data-bs-target="#deletemodal" data-id = "{{$dailycost->id}}">Del</button>
+                 <a href="{{route('trashes.edit',$trash->id)}}"><button class="text-primary btn btn-sm px-3">Edit</button></a>
+                 <button type="button" class="btn btn-sm btn-danger px-3 deleteform" data-bs-toggle="modal" data-bs-target="#deletemodal" data-id = "{{$trash->id}}">Del</button>
               </td>
 
-              <form id="formdelete-{{$dailycost->id}}" action="{{route('dailycosts.destroy',$dailycost -> id)}}" method="POST">
+              <form id="formdelete-{{$trash->id}}" action="{{route('trashes.destroy',$trash -> id)}}" method="POST">
                 @csrf 
                 @method('DELETE')
                
@@ -103,7 +101,7 @@
        
 
       <div class="d-flex justify-content-end mt-5">
-        {{ $dailycosts->appends(request()->only('filter'))->links('pagination::default') }}
+        {{ $trashes->appends(request()->only('filter'))->links('pagination::default') }}
      </div>
     
      
