@@ -14,6 +14,13 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-lg-10 col-md-9 ms-auto">
+
+					<div class="mt-3">
+					    <h3 class="fw-medium">	{{ucwords(Request::path())}}</h3>
+						<div>
+							<span>abc/abc/edi</span>
+						</div>
+					</div>
             
                   @yield('content')
 
