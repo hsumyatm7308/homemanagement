@@ -4,7 +4,6 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\DailycostsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TrashController;
-use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,9 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('/dailycosts', DailycostsController::class);
-    // Route::get('/filter', [DailycostsController::class, 'filterweek'])->name('dailycosts.filter');
     Route::resource('/categories', CategoriesController::class);
     Route::resource('/trashes', TrashController::class);
+    Route::get('/trashesrestore/{id}', [TrashController::class, 'restore'])->name('trashes.restore');
+    Route::get('/trashesdestoryall', [TrashController::class, 'destoryall'])->name('trashes.destoryall');
 
 });
 

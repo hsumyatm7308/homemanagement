@@ -15,7 +15,7 @@ class DailycostsController extends Controller
     //
     public function index(Request $request)
     {
-        $data['dailycosts'] = Dailycost::orderBy('id', 'desc')->paginate(10);
+        $data['dailycosts'] = Dailycost::orderBy('id', 'desc')->paginate(20);
 
         if ($request->has('filter')) {
             $filter = $request->input('filter');

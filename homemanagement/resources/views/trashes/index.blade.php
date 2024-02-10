@@ -12,7 +12,9 @@
    
 
         <div>
-            <button class="btn btn-primary rounded-0">Delete All</button>
+            <a href="{{route('trashes.destoryall')}}">
+              <button class="btn btn-primary rounded-0">Delete All</button>
+            </a>
         </div>
        
         <div>
@@ -55,7 +57,7 @@
           </thead>
 
           <tbody>
-          @foreach($trashes as $idx => $trash)
+          @forelse($trashes as $idx => $trash)
 
             <tr class="mb-5">
               <th scope="row"><button class="btn btn-sm">{{++$idx}}</button></th>
@@ -73,8 +75,8 @@
               <td><button class="btn btn-sm">{{Str::limit($trash->remark,30)}}</button></td>
               <td><button class="btn btn-sm">{{$trash->updated_at->format('d-M-Y')}}</button></td>
               <td class="d-flex ">
-                 <a href="{{route('trashes.edit',$trash->id)}}"><button class="text-primary btn btn-sm px-3">Edit</button></a>
-                 <button type="button" class="btn btn-sm btn-danger px-3 deleteform" data-bs-toggle="modal" data-bs-target="#deletemodal" data-id = "{{$trash->id}}">Del</button>
+                 <button type="button" class="text-primary btn btn-sm px-3 deleteform" data-bs-toggle="modal" data-bs-target="#deletemodal" data-id = "{{$trash->id}}">Del</button>
+                 <a href="{{route('trashes.restore',$trash->id)}}"><button class="text-white btn btn-sm btn-secondary px-3">Restore</button></a>
               </td>
 
               <form id="formdelete-{{$trash->id}}" action="{{route('trashes.destroy',$trash -> id)}}" method="POST">
@@ -86,10 +88,16 @@
             </tr>
 
 
+            @empty 
+            <tr>
+              <td>
+                <li>No data avabiable</li>
+              </td>
+            </tr>
 
 
 
-            @endforeach
+            @endforelse
          
           </tbody>
 

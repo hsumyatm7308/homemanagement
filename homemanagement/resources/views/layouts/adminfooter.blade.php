@@ -26,27 +26,7 @@
 	</footer>
 	<!--End Footer Section-->
 
-	<!--Start Right Navbar-->
-	<div class="right-pannels">
-		<h6>Custom Your Templates</h6>
-		<p class="small">Hifi!!! Here you can change your theme</p>
 
-		<hr/>
-
-		<div class="themecolors">
-			<a href="javascript:void(0);"><i class="fas fa-square text-primary shadow fa-lg"></i></a>
-			<a href="javascript:void(0);"><i class="fas fa-square text-secondary shadow fa-lg"></i></a>
-			<a href="javascript:void(0);"><i class="fas fa-square text-info shadow fa-lg"></i></a>
-			<a href="javascript:void(0);"><i class="fas fa-square text-success shadow fa-lg"></i></a>
-			<a href="javascript:void(0);"><i class="fas fa-square text-warning shadow fa-lg"></i></a>
-			<a href="javascript:void(0);"><i class="fas fa-square text-danger shadow fa-lg"></i></a>
-			<a href="javascript:void(0);"><i class="fas fa-square text-muted shadow fa-lg"></i></a>
-			<a href="javascript:void(0);"><i class="fas fa-square text-white shadow fa-lg"></i></a>
-			<a href="javascript:void(0);"><i class="fas fa-square text-dark shadow fa-lg"></i></a>
-			<a href="javascript:void(0);"><i class="fas fa-square text-light shadow fa-lg"></i></a>
-		</div>
-	</div>
-	<!--End Right Navbar-->
 
 
 	<!-- bootstrap css1 js1 -->
