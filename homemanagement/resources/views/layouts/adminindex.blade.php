@@ -17,10 +17,13 @@
 
 					<div class="mt-3">
 					    <h3 class="fw-medium">	{{ucwords(Request::path())}}</h3>
-						<div>
-							<span>abc/abc/edi</span>
+						<div class="text-dark">
+							<a class="text-dark" href="{{Request::root()}}"><span>Home</span></a>
+							<a class="text-dark" href="{{url()->previous()}}"><span>/{{preg_replace('/[[:punct:]]+[[:digit:]]+/','',ucwords(str_replace('/', '', str_replace(Request::root(), '', url()->previous())) ))}}</span></a>
+							<a class="text-secondary" href=""><span>/{{ucwords(Request::path())}}</span></a>
 						</div>
 					</div>
+
             
                   @yield('content')
 
