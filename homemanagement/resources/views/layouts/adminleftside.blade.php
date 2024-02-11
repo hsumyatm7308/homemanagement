@@ -129,12 +129,10 @@
 											class="fas fa-angle-left mores"></i></a>
 
 									<ul id="chartelement" class="collapse ps-2">
-										<li><a href="javascript:void(0);" class="nav-link text-white sidebarlinks"><i
-													class="fas fa-long-arrow-alt-right me-4"></i>Status</a></li>
 										<li><a href="{{route('categories.index')}}" class="nav-link text-white sidebarlinks"><i
-													class="fas fa-long-arrow-alt-right me-4"></i>Category</a></li>
-								
-
+											class="fas fa-long-arrow-alt-right me-4"></i>Category</a></li>
+										<li><a href="{{route('statuses.index')}}" class="nav-link text-white sidebarlinks">
+											<i class="fas fa-long-arrow-alt-right me-4"></i>Status</a></li>									
 									</ul>
 
 								</li>

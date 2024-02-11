@@ -14,7 +14,6 @@
             <tr class="table-primary">
                 <th>No</td>
                 <th>Name</th>
-                <th>Status</th>
                 <th>By</th>
                 <th>Crated At</th>
                 <th>Update At</th>
@@ -24,30 +23,21 @@
         </thead>
         <tbody>
             
-            @foreach($categories as $idx=>$category)
+            @foreach($statuses as $idx=>$status)
             <tr>
                 <td>{{++$idx}}</td>
-               
-
-                <td>{{$category['title']}}</td>
-                <td>
-                    <div>
-                        <div class="form-check form-switch">
-                            <input type="checkbox" class="form-check-input change-btn" {{ $category->status_id === 1 ? 'checked' : ''}}  data-id="{{$category->id}}" />
-                        </div>
-                    </div>
-                </td>
-                <td>{{$category->user['name']}}</td>
-                <td>{{$category->created_at->format('d-M-Y')}}</td>
-                <td>{{$category->updated_at->format('d-M-Y')}}</td>
+                <td>{{$status['title']}}</td>
+                <td>{{$status->user['name']}}</td>
+                <td>{{$status->created_at->format('d-M-Y')}}</td>
+                <td>{{$status->updated_at->format('d-M-Y')}}</td>
                
                 <td>
-                    <a href="javascript:void(0);" class="text-primary me-2 editform" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="{{$category->id}}" data-name="{{$category->name}}" data-status="{{$category->status_id}}">Edit</a>
+                    <a href="javascript:void(0);" class="text-primary me-2 editform" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="{{$status->id}}" data-name="{{$status->name}}" data-status="{{$status->status_id}}">Edit</a>
                     
-                    <button type="button" class="btn btn-sm btn-danger px-3 deleteform" data-bs-toggle="modal" data-bs-target="#deletemodal" data-id = "{{$category->id}}">Del</button>
+                    <button type="button" class="btn btn-sm btn-danger px-3 deleteform" data-bs-toggle="modal" data-bs-target="#deletemodal" data-id = "{{$status->id}}">Del</button>
                 </td>
   
-                <form id="formdelete-{{$category->id}}" action="{{route('categories.destroy',$category -> id)}}" method="POST">
+                <form id="formdelete-{{$status->id}}" action="{{route('statuses.destroy',$status -> id)}}" method="POST">
                   @csrf 
                   @method('DELETE')
                  
@@ -76,7 +66,7 @@
             </div>
 
             <div class="modal-body">
-                <form id="{{route('categories.store')}}" action="" method="POST" enctype="multipart/form-data">
+                <form id="{{route('statuses.store')}}" action="" method="POST" enctype="multipart/form-data">
        
                     {{csrf_field()}}
 
@@ -87,16 +77,6 @@
                            <input type="text" name="title" id="title" class="form-control form-control-sm rounded-0" placeholder="Enter your name" value="{{old('title')}}" />
                        </div>
 
-                       <div class="col-md-3 form-group">
-                        <label for="status_id"> Status <span class="text-danger">*</span></label>
-                        <select name="status_id" id="status_id" class="form-control form-control-sm rounded-0">
-                            
-                             @foreach($statuses as $status)
-                                <option value="{{$status['id']}}">{{$status['title']}}</option>
-                            @endforeach
-                            
-                        </select>
-                       </div>
                
                        <div class="col-md-2">
                             <button type="submit" class="btn btn-primary btn-sm rounded-0">Create</button>                             
@@ -118,7 +98,7 @@
 
             <div class="modal-header">
                 <h6 class="modal-title">Edit Form</h6>
-                <button type="category" class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="status" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
             <div class="modal-body">
@@ -138,10 +118,10 @@
                         <label for="editstatus_id"> Status <span class="text-danger">*</span></label>
                         
                         <select name="status_id" id="editstatus_id" class="form-control form-control-sm rounded-0">
-                            @foreach($statuses as $status)
+                            {{-- @foreach($statuses as $status)
                                 <option value="{{$status['id']}}">{{$status['name']}}</option>
                             @endforeach
-                            
+                             --}}
                         </select>
                        </div>
                
@@ -187,8 +167,6 @@
 
 @endsection
 
-
-
 @section('script')
 
 <script type="text/javascript">
@@ -203,7 +181,7 @@ $(document).ready(function(){
 
             const getid = $(this).attr('data-id');
                     
-            $("#formaction").attr("action",`/categories/${getid}`);
+            $("#formaction").attr("action",`/statuses/${getid}`);
 
             e.preventDefault();
         });
@@ -226,27 +204,6 @@ $(document).ready(function(){
         });
 
         //end delete item
-
-
-        // change status 
-        $(document).on('click', '.change-btn', function() {
-
-            let getid = $(this).attr('data-id');
-
-            let categorystatus = $(this).prop('checked') ? 1 : 2 ;
-
-            $.ajax({
-                url : "categorystatus",
-                method : "GET",
-                dataType: "json",
-                data : {"id" : getid ,"status_id" : categorystatus},
-
-                success: function(response){
-                    console.log(response.success);
-                }
-            })
-        });
-        // change status 
 });
     
 

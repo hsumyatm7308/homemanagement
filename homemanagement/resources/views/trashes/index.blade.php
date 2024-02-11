@@ -12,9 +12,16 @@
    
 
         <div>
-            <a href="{{route('trashes.destoryall')}}">
-              <button class="btn btn-primary rounded-0">Delete All</button>
-            </a>
+            {{-- <a href="{{route('trashes.destoryall')}}"> --}}
+              <button class="btn btn-primary rounded-0 deleteform" data-bs-toggle="modal" data-bs-target="#deletemodal" data-id="all">Delete All</button>
+            {{-- </a> --}}
+
+
+            <form id="formdelete-all" action="{{route('trashes.destoryall')}}" method="GET">
+              @csrf 
+          
+             
+            </form>
         </div>
        
         <div>
@@ -131,7 +138,7 @@
     <div class="modal-content">
        
         <div class="modal-body mx-auto p-5">
-            <h3> Are you sure delete this item? </h3>
+            <h3> Are you sure delete? </h3>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -160,14 +167,20 @@
 
     let getid = $(this).attr('data-id');
 
+    console.log(getid);
+
     $('.delete-btns').attr('data-delid', getid);
 
     let getdelid = $('.delete-btns').attr('data-delid');
 
     $('#delete-btns').click(function(){
       if(getid == getdelid){
-      $(`#formdelete-${getid}`).submit();
-    }
+        $(`#formdelete-${getid}`).submit();
+
+       }else{
+        $(`#formdelete-all`).submit();
+
+       }
     });
 
 

@@ -14,6 +14,7 @@
             <tr class="table-primary">
                 <th>No</td>
                 <th>Name</th>
+                <th>Phone</th>
                 <th>Status</th>
                 <th>By</th>
                 <th>Crated At</th>
@@ -24,30 +25,31 @@
         </thead>
         <tbody>
             
-            @foreach($categories as $idx=>$category)
+            @foreach($contacts as $idx=>$contact)
             <tr>
                 <td>{{++$idx}}</td>
                
 
-                <td>{{$category['title']}}</td>
+                <td>{{$contact['title']}}</td>
+                <td>{{$contact['number']}}</td>
                 <td>
                     <div>
                         <div class="form-check form-switch">
-                            <input type="checkbox" class="form-check-input change-btn" {{ $category->status_id === 1 ? 'checked' : ''}}  data-id="{{$category->id}}" />
+                            <input type="checkbox" class="form-check-input change-btn" {{ $contact->status_id === 1 ? 'checked' : ''}}  data-id="{{$contact->id}}" />
                         </div>
                     </div>
                 </td>
-                <td>{{$category->user['name']}}</td>
-                <td>{{$category->created_at->format('d-M-Y')}}</td>
-                <td>{{$category->updated_at->format('d-M-Y')}}</td>
+                <td>{{$contact->user['name']}}</td>
+                <td>{{$contact->created_at->format('d-M-Y')}}</td>
+                <td>{{$contact->updated_at->format('d-M-Y')}}</td>
                
                 <td>
-                    <a href="javascript:void(0);" class="text-primary me-2 editform" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="{{$category->id}}" data-name="{{$category->name}}" data-status="{{$category->status_id}}">Edit</a>
+                    <a href="javascript:void(0);" class="text-primary me-2 editform" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="{{$contact->id}}" data-name="{{$contact->name}}" data-status="{{$contact->status_id}}">Edit</a>
                     
-                    <button type="button" class="btn btn-sm btn-danger px-3 deleteform" data-bs-toggle="modal" data-bs-target="#deletemodal" data-id = "{{$category->id}}">Del</button>
+                    <button type="button" class="btn btn-sm btn-danger px-3 deleteform" data-bs-toggle="modal" data-bs-target="#deletemodal" data-id = "{{$contact->id}}">Del</button>
                 </td>
   
-                <form id="formdelete-{{$category->id}}" action="{{route('categories.destroy',$category -> id)}}" method="POST">
+                <form id="formdelete-{{$contact->id}}" action="{{route('contacts.destroy',$contact -> id)}}" method="POST">
                   @csrf 
                   @method('DELETE')
                  
@@ -76,18 +78,24 @@
             </div>
 
             <div class="modal-body">
-                <form id="{{route('categories.store')}}" action="" method="POST" enctype="multipart/form-data">
+                <form id="{{route('contacts.store')}}" action="" method="POST" enctype="multipart/form-data">
        
                     {{csrf_field()}}
 
                    <div class="row align-items-end">
-                       <div class="col-md-7 form-group">
+                       <div class="col-md-12 form-group">
                            <label for="title"> Name <span class="text-danger">*</span></label>
 
                            <input type="text" name="title" id="title" class="form-control form-control-sm rounded-0" placeholder="Enter your name" value="{{old('title')}}" />
                        </div>
 
-                       <div class="col-md-3 form-group">
+                       <div class="col-md-6 form-group">
+                        <label for="phnumber"> Number <span class="text-danger">*</span></label>
+
+                        <input type="text" name="number" id="phnumber" class="form-control form-control-sm rounded-0" placeholder="Enter your number" value="{{old('number')}}" />
+                    </div>
+
+                       <div class="col-md-6 form-group">
                         <label for="status_id"> Status <span class="text-danger">*</span></label>
                         <select name="status_id" id="status_id" class="form-control form-control-sm rounded-0">
                             
@@ -98,7 +106,23 @@
                         </select>
                        </div>
                
-                       <div class="col-md-2">
+
+
+                       <div class="col-md-10 form-group mt-2">
+                        <label for="relative_id"> Relative <span class="text-danger">*</span></label>
+                        <select name="relative_id" id="relative_id" class="form-control form-control-sm rounded-0">
+                            
+                             @foreach($relatives as $relative)
+                                <option value="{{$relative['id']}}">{{$relative['title']}}</option>
+                            @endforeach
+                            
+                        </select>
+                       </div>
+
+
+
+                       <div class="col-md-2 d-flex justify-content-end mt-2">
+                            {{-- <button type="button" class="btn btn-secondary btn-sm rounded-0 me-2">Cancle</button>                              --}}
                             <button type="submit" class="btn btn-primary btn-sm rounded-0">Create</button>                             
                        </div>                  
                    </div>
@@ -118,7 +142,7 @@
 
             <div class="modal-header">
                 <h6 class="modal-title">Edit Form</h6>
-                <button type="category" class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="contact" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
             <div class="modal-body">
@@ -145,6 +169,19 @@
                         </select>
                        </div>
                
+
+
+                       <div class="col-md-6 form-group mt-2">
+                        <label for="editrelative_id"> Relative <span class="text-danger">*</span></label>
+                        <select name="relative_id" id="editrelative_id" class="form-control form-control-sm rounded-0">
+                            
+                             @foreach($relatives as $relative)
+                                <option value="{{$relative['id']}}">{{$relative['title']}}</option>
+                            @endforeach
+                            
+                        </select>
+                       </div>
+                       
                        <div class="col-md-2">
                             <button type="submit" class="btn btn-primary btn-sm rounded-0">Update</button>                             
                        </div>                  
@@ -203,7 +240,7 @@ $(document).ready(function(){
 
             const getid = $(this).attr('data-id');
                     
-            $("#formaction").attr("action",`/categories/${getid}`);
+            $("#formaction").attr("action",`/contacts/${getid}`);
 
             e.preventDefault();
         });
@@ -233,13 +270,13 @@ $(document).ready(function(){
 
             let getid = $(this).attr('data-id');
 
-            let categorystatus = $(this).prop('checked') ? 1 : 2 ;
+            let contactstatus = $(this).prop('checked') ? 1 : 2 ;
 
             $.ajax({
-                url : "categorystatus",
+                url : "contactstatus",
                 method : "GET",
                 dataType: "json",
-                data : {"id" : getid ,"status_id" : categorystatus},
+                data : {"id" : getid ,"status_id" : contactstatus},
 
                 success: function(response){
                     console.log(response.success);

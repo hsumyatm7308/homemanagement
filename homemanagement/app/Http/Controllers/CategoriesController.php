@@ -16,8 +16,8 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = Category::all();
-        // $statuses = Status::whereIn('id', [3, 4])->get();
-        return view('categories.index', compact('categories'));
+        $statuses = Status::whereIn('id', [1, 2])->get();
+        return view('categories.index', compact('categories', 'statuses'));
     }
 
 
@@ -26,7 +26,7 @@ class CategoriesController extends Controller
         $this->validate($request, [
             'title' => 'required|max:50|unique:categories',
 
-            // 'status_id' => 'required|in:3,4'
+            'status_id' => 'required|in:1,2'
         ]);
 
         $user = Auth::user();
@@ -36,8 +36,7 @@ class CategoriesController extends Controller
 
         $category->title = $request['title'];
         $category->slug = Str::slug($request['title']);
-        // $category->status_id = $request['status_id'];
-        $category->status_id = 1;
+        $category->status_id = $request['status_id'];
         $category->user_id = $user_id;
 
 
@@ -49,7 +48,7 @@ class CategoriesController extends Controller
     {
         $this->validate($request, [
             'title' => ['required', 'max:50', 'unique:categories,title,' . $id],
-            // 'status_id' => ['required', 'in:3,4']
+            'status_id' => ['required', 'in:1,2']
         ]);
 
         $user = Auth::user();
@@ -59,7 +58,7 @@ class CategoriesController extends Controller
 
         $category->title = $request['title'];
         $category->slug = Str::slug($request['title']);
-        // $category->status_id = $request['status_id'];
+        $category->status_id = $request['status_id'];
 
         $category->user_id = $user_id;
 
@@ -74,5 +73,15 @@ class CategoriesController extends Controller
         $category = Category::findOrFail($id);
         $category->delete();
         return redirect()->back();
+    }
+
+
+    public function categorystatus(Request $request)
+    {
+        $category = Category::findOrFail($request['id']);
+        $category->status_id = $request['status_id'];
+        $category->save();
+
+        return response()->json(['success', 'Status Change Successfully']);
     }
 }
