@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\Contact;
 use App\Models\Relative;
 use App\Models\Status;
 use App\Notifications\ContactNotification;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -28,6 +30,7 @@ class ContactsController extends Controller
             'title' => 'required|max:50|unique:contacts',
             'number' => 'required',
             'status_id' => 'required|in:1,2',
+            'birthday' => 'nullable',
             'relative_id' => 'nullable'
         ]);
 
@@ -42,6 +45,7 @@ class ContactsController extends Controller
         $contact->status_id = $request['status_id'];
         // $contact->relative_id = $request['relative_id'];
         $contact->relative_id = 1;
+        $contact->birthday = $request['birthday'];
         $contact->user_id = $user_id;
 
 
@@ -64,6 +68,7 @@ class ContactsController extends Controller
             'title' => ['required', 'max:50'],
             'number' => 'required',
             'status_id' => ['required', 'in:1,2'],
+            'birthday' => 'nullable',
             'relative_id' => 'nullable'
         ]);
 
@@ -74,9 +79,10 @@ class ContactsController extends Controller
 
         $contact->title = $request['title'];
         $contact->slug = Str::slug($request['title']);
-        $contact->number = $request['phnumber'];
+        $contact->number = $request['number'];
         $contact->status_id = $request['status_id'];
         // $contact->relative_id = $request['relative_id'];
+        $contact->birthday = $request['birthday'];
         $contact->relative_id = 1;
 
         $contact->user_id = $user_id;
@@ -110,6 +116,20 @@ class ContactsController extends Controller
         $contact->save();
 
         return response()->json(['success', 'Status Change Successfully']);
+    }
+
+
+    public function mailbox(Request $request, string $id)
+    {
+
+        $contact = Contact::findOrFail($id);
+        $to = $request['cmpemail'];
+        $subject = $request['cmpsubject'];
+        $content = $request['cmpcontent'];
+
+        Mail::to($to)->send(new ContactMail($subject, $content, $contact));
+
+        return redirect()->back();
     }
 
 

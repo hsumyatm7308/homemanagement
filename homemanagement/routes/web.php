@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/categorystatus', [CategoriesController::class, 'categorystatus']);
 
     Route::resource('/contacts', ContactsController::class);
+    Route::post('compose/mailbox/{id}', [ContactsController::class, 'mailbox'])->name('contacts.mailbox');
 
 
     Route::resource('/dailycosts', DailycostsController::class);

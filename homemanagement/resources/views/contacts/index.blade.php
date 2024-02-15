@@ -17,6 +17,7 @@
                 <th>Name</th>
                 <th>Phone</th>
                 <th>Status</th>
+                <th>relative</th>
                 <th>By</th>
                 <th>Crated At</th>
                 <th>Update At</th>
@@ -40,12 +41,13 @@
                         </div>
                     </div>
                 </td>
+                <td>relative</td>
                 <td>{{$contact->user['name']}}</td>
                 <td>{{$contact->created_at->format('d-M-Y')}}</td>
                 <td>{{$contact->updated_at->format('d-M-Y')}}</td>
                
                 <td>
-                    <a href="javascript:void(0);" class="text-primary me-2 editform" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="{{$contact->id}}" data-name="{{$contact->name}}" data-status="{{$contact->status_id}}">Edit</a>
+                    <a href="javascript:void(0);" class="text-primary me-3 editform" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="{{$contact->id}}" data-title="{{$contact->title}}" data-birthday="{{$contact->birthday}}"   data-relative="{{$contact->relative_id}}" data-status="{{$contact->status_id}}">Edit</a>
                     
                     <button type="button" class="btn btn-sm btn-danger px-3 deleteform" data-bs-toggle="modal" data-bs-target="#deletemodal" data-id = "{{$contact->id}}">Del</button>
                 </td>
@@ -84,20 +86,20 @@
                     {{csrf_field()}}
 
                    <div class="row align-items-end">
-                       <div class="col-md-6 form-group">
+                       <div class="col-md-6 form-group mt-2">
                            <label for="title"> Name <span class="text-danger">*</span></label>
 
                            <input type="text" name="title" id="title" class="form-control form-control-sm rounded-0" placeholder="Enter your name" value="{{old('title')}}" />
                        </div>
 
-                       <div class="col-md-6 form-group ">
+                       <div class="col-md-6 form-group mt-2">
                         <label for="phnumber"> Number <span class="text-danger">*</span></label>
 
                         <input type="text" name="number" id="phnumber" class="form-control form-control-sm rounded-0" placeholder="Enter your number" value="{{old('number')}}" />
                        </div>
 
                
-                       <div class="col-md-6 form-group ">
+                       <div class="col-md-6 form-group mt-2">
                         <label for="birthday"> Birthday <span class="text-danger">*</span></label>
 
                         <input type="date" name="birthday" id="birthday" class="form-control form-control-sm rounded-0" placeholder="Enter your number" value="{{old('number')}}" />
@@ -106,7 +108,7 @@
 
 
 
-                       <div class="col-md-6 form-group">
+                       <div class="col-md-6 form-group mt-2">
                         <label for="status_id"> Status <span class="text-danger">*</span></label>
                         <select name="status_id" id="status_id" class="form-control form-control-sm rounded-0">
                             
@@ -117,7 +119,7 @@
                         </select>
                        </div>
 
-                       <div class="col-md-8 form-group ">
+                       <div class="col-md-8 form-group mt-2">
                         <label for="relative_id"> Relative <span class="text-danger">*</span></label>
                         <select name="relative_id" id="relative_id" class="form-control form-control-sm rounded-0">
                             
@@ -162,18 +164,32 @@
                     {{method_field('PUT')}}
             
                    <div class="row align-items-end">
-                       <div class="col-md-7 form-group">
-                           <label for="editname"> Name <span class="text-danger">*</span></label>
+                    <div class="col-md-6 form-group mt-2">
+                        <label for="edittitle"> Name <span class="text-danger">*</span></label>
 
-                           <input type="text" name="title" id="editname" class="form-control form-control-sm rounded-0" placeholder="Enter your name" value="{{old('title')}}" />
+                        <input type="text" name="title" id="edittitle" class="form-control form-control-sm rounded-0" placeholder="Enter your name" value="{{old('title')}}" />
+                    </div>
+
+                       <div class="col-md-6 form-group mt-2">
+                        <label for="editnumber"> Number <span class="text-danger">*</span></label>
+
+                        <input type="text" name="number" id="editnumber" class="form-control form-control-sm rounded-0" placeholder="Enter your number" value="{{$contact->number}}" />
                        </div>
 
-                       <div class="col-md-3 form-group">
+               
+                       <div class="col-md-6 form-group mt-2">
+                        <label for="editbirthday"> Birthday <span class="text-danger">*</span></label>
+
+                        <input type="date" name="birthday" id="editbirthday" class="form-control form-control-sm rounded-0" placeholder="Enter your number" value="{{$contact->birthday}}" />
+                       </div>
+
+
+                       <div class="col-md-6 form-group">
                         <label for="editstatus_id"> Status <span class="text-danger">*</span></label>
                         
                         <select name="status_id" id="editstatus_id" class="form-control form-control-sm rounded-0">
                             @foreach($statuses as $status)
-                                <option value="{{$status['id']}}">{{$status['name']}}</option>
+                                <option value="{{$status['id']}}">{{$status['title']}}</option>
                             @endforeach
                             
                         </select>
@@ -181,7 +197,7 @@
                
 
 
-                       <div class="col-md-6 form-group mt-2">
+                       <div class="col-md-8 form-group mt-2">
                         <label for="editrelative_id"> Relative <span class="text-danger">*</span></label>
                         <select name="relative_id" id="editrelative_id" class="form-control form-control-sm rounded-0">
                             
@@ -192,7 +208,8 @@
                         </select>
                        </div>
                        
-                       <div class="col-md-2">
+                       <div class="col-md-4 d-flex justify-content-end">
+                            <button type="button" class="btn btn-secondary btn-sm rounded-0 me-2">Cancle</button>                             
                             <button type="submit" class="btn btn-primary btn-sm rounded-0">Update</button>                             
                        </div>                  
                    </div>
@@ -245,7 +262,10 @@ $(document).ready(function(){
          //start edit form 
         $(document).on('click','.editform',function(e){
 
-            $("#editname").val($(this).attr('data-name'));
+            $("#edittitle").val($(this).attr('data-title'));
+            $('#editnumber').val($(this).attr('data-number'));
+            $('#editbirthday').val($(this).attr('data-birthday')); 
+            $('#editrelative_id').val($(this).attr('data-relative')); 
             $("#editstatus_id").val($(this).data('status'));
 
             const getid = $(this).attr('data-id');

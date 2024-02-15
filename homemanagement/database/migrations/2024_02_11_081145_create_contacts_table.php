@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('slug');
             $table->string('number');
             $table->unsignedBigInteger('status_id');
+            $table->date('birthday');
             $table->unsignedBigInteger('relative_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
