@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\Relative;
 use App\Models\Status;
+use App\Notifications\ContactNotification;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -44,6 +46,14 @@ class ContactsController extends Controller
 
 
         $contact->save();
+
+        $data = [
+            'title' => $request['title'],
+            'number' => $request['number']
+
+        ];
+
+        Notification::send($user, new ContactNotification($data));
         return redirect(route('contacts.index'));
     }
 
@@ -92,4 +102,8 @@ class ContactsController extends Controller
 
         return response()->json(['success', 'Status Change Successfully']);
     }
+
+
+
+
 }

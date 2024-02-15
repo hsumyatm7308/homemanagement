@@ -108,8 +108,8 @@
 											class="fas fa-angle-left mores"></i></a>
 
 									<ul id="iconselement" class="collapse ps-2">
-										<li><a href="javascript:void(0);" class="nav-link text-white sidebarlinks"><i
-													class="fas fa-long-arrow-alt-right me-4"></i>All Members</a></li>
+										<li><a href="javascript:void(0);" class="nav-link text-white sidebarlinks"><i class="fas fa-user-alt me-4"></i>All members</a></li>
+													<li><a href="{{route('contacts.index')}}" class="nav-link text-white sidebarlinks"><i class="fas fa-address-book me-4"></i>Contact</a></li>
 								
 									</ul>
 
