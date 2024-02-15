@@ -57,6 +57,7 @@ class ContactsController extends Controller
         return redirect(route('contacts.index'));
     }
 
+
     public function update(Request $request, string $id)
     {
         $this->validate($request, [
@@ -84,6 +85,14 @@ class ContactsController extends Controller
         return redirect(route('contacts.index'));
     }
 
+
+
+
+    public function show(string $id)
+    {
+        $contact = Contact::findOrFail($id);
+        return view('contacts.show')->with("contact", $contact);
+    }
 
 
     public function destroy(string $id)

@@ -1,3 +1,4 @@
+
 @extends('layouts.adminindex')
 @section('content')
 
@@ -30,7 +31,7 @@
                 <td>{{++$idx}}</td>
                
 
-                <td>{{$contact['title']}}</td>
+                <td><a href="{{route('contacts.show',$contact->id)}}"> {{$contact['title']}}</a></td>
                 <td>{{$contact['number']}}</td>
                 <td>
                     <div>
@@ -83,17 +84,27 @@
                     {{csrf_field()}}
 
                    <div class="row align-items-end">
-                       <div class="col-md-12 form-group">
+                       <div class="col-md-6 form-group">
                            <label for="title"> Name <span class="text-danger">*</span></label>
 
                            <input type="text" name="title" id="title" class="form-control form-control-sm rounded-0" placeholder="Enter your name" value="{{old('title')}}" />
                        </div>
 
-                       <div class="col-md-6 form-group">
+                       <div class="col-md-6 form-group ">
                         <label for="phnumber"> Number <span class="text-danger">*</span></label>
 
                         <input type="text" name="number" id="phnumber" class="form-control form-control-sm rounded-0" placeholder="Enter your number" value="{{old('number')}}" />
-                    </div>
+                       </div>
+
+               
+                       <div class="col-md-6 form-group ">
+                        <label for="birthday"> Birthday <span class="text-danger">*</span></label>
+
+                        <input type="date" name="birthday" id="birthday" class="form-control form-control-sm rounded-0" placeholder="Enter your number" value="{{old('number')}}" />
+                       </div>
+
+
+
 
                        <div class="col-md-6 form-group">
                         <label for="status_id"> Status <span class="text-danger">*</span></label>
@@ -105,10 +116,8 @@
                             
                         </select>
                        </div>
-               
 
-
-                       <div class="col-md-10 form-group mt-2">
+                       <div class="col-md-8 form-group ">
                         <label for="relative_id"> Relative <span class="text-danger">*</span></label>
                         <select name="relative_id" id="relative_id" class="form-control form-control-sm rounded-0">
                             
@@ -120,9 +129,10 @@
                        </div>
 
 
+                  
 
-                       <div class="col-md-2 d-flex justify-content-end mt-2">
-                            {{-- <button type="button" class="btn btn-secondary btn-sm rounded-0 me-2">Cancle</button>                              --}}
+                       <div class="col-md-4 d-flex justify-content-end mt-2">
+                            <button type="button" class="btn btn-secondary btn-sm rounded-0 me-2">Cancle</button>                             
                             <button type="submit" class="btn btn-primary btn-sm rounded-0">Create</button>                             
                        </div>                  
                    </div>
