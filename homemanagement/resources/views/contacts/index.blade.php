@@ -15,7 +15,6 @@
             <tr class="table-primary">
                 <th>No</td>
                 <th>Name</th>
-                <th>Phone</th>
                 <th>Status</th>
                 <th>relative</th>
                 <th>By</th>
@@ -33,7 +32,6 @@
                
 
                 <td><a href="{{route('contacts.show',$contact->id)}}"> {{$contact['title']}}</a></td>
-                <td>{{$contact['number']}}</td>
                 <td>
                     <div>
                         <div class="form-check form-switch">
@@ -41,7 +39,7 @@
                         </div>
                     </div>
                 </td>
-                <td>relative</td>
+                <td>{{$contact->relative->title}}</td>
                 <td>{{$contact->user['name']}}</td>
                 <td>{{$contact->created_at->format('d-M-Y')}}</td>
                 <td>{{$contact->updated_at->format('d-M-Y')}}</td>
@@ -92,11 +90,7 @@
                            <input type="text" name="title" id="title" class="form-control form-control-sm rounded-0" placeholder="Enter your name" value="{{old('title')}}" />
                        </div>
 
-                       <div class="col-md-6 form-group mt-2">
-                        <label for="phnumber"> Number <span class="text-danger">*</span></label>
-
-                        <input type="text" name="number" id="phnumber" class="form-control form-control-sm rounded-0" placeholder="Enter your number" value="{{old('number')}}" />
-                       </div>
+           
 
                
                        <div class="col-md-6 form-group mt-2">
@@ -170,17 +164,12 @@
                         <input type="text" name="title" id="edittitle" class="form-control form-control-sm rounded-0" placeholder="Enter your name" value="{{old('title')}}" />
                     </div>
 
-                       <div class="col-md-6 form-group mt-2">
-                        <label for="editnumber"> Number <span class="text-danger">*</span></label>
-
-                        <input type="text" name="number" id="editnumber" class="form-control form-control-sm rounded-0" placeholder="Enter your number" value="{{$contact->number}}" />
-                       </div>
-
+                 
                
                        <div class="col-md-6 form-group mt-2">
                         <label for="editbirthday"> Birthday <span class="text-danger">*</span></label>
 
-                        <input type="date" name="birthday" id="editbirthday" class="form-control form-control-sm rounded-0" placeholder="Enter your number" value="{{$contact->birthday}}" />
+                        <input type="date" name="birthday" id="editbirthday" class="form-control form-control-sm rounded-0" placeholder="Enter your number" value="" />
                        </div>
 
 
@@ -263,7 +252,6 @@ $(document).ready(function(){
         $(document).on('click','.editform',function(e){
 
             $("#edittitle").val($(this).attr('data-title'));
-            $('#editnumber').val($(this).attr('data-number'));
             $('#editbirthday').val($(this).attr('data-birthday')); 
             $('#editrelative_id').val($(this).attr('data-relative')); 
             $("#editstatus_id").val($(this).data('status'));

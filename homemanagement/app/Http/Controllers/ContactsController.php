@@ -28,7 +28,6 @@ class ContactsController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|max:50|unique:contacts',
-            'number' => 'required',
             'status_id' => 'required|in:1,2',
             'birthday' => 'nullable',
             'relative_id' => 'nullable'
@@ -41,10 +40,8 @@ class ContactsController extends Controller
 
         $contact->title = $request['title'];
         $contact->slug = Str::slug($request['title']);
-        $contact->number = $request['number'];
         $contact->status_id = $request['status_id'];
-        // $contact->relative_id = $request['relative_id'];
-        $contact->relative_id = 1;
+        $contact->relative_id = $request['relative_id'];
         $contact->birthday = $request['birthday'];
         $contact->user_id = $user_id;
 
@@ -53,8 +50,6 @@ class ContactsController extends Controller
 
         $data = [
             'title' => $request['title'],
-            'number' => $request['number']
-
         ];
 
         Notification::send($user, new ContactNotification($data));
@@ -66,7 +61,6 @@ class ContactsController extends Controller
     {
         $this->validate($request, [
             'title' => ['required', 'max:50'],
-            'number' => 'required',
             'status_id' => ['required', 'in:1,2'],
             'birthday' => 'nullable',
             'relative_id' => 'nullable'
@@ -79,11 +73,9 @@ class ContactsController extends Controller
 
         $contact->title = $request['title'];
         $contact->slug = Str::slug($request['title']);
-        $contact->number = $request['number'];
         $contact->status_id = $request['status_id'];
-        // $contact->relative_id = $request['relative_id'];
+        $contact->relative_id = $request['relative_id'];
         $contact->birthday = $request['birthday'];
-        $contact->relative_id = 1;
 
         $contact->user_id = $user_id;
 

@@ -23,6 +23,11 @@ class Category extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function relative()
+    {
+        return $this->belongsTo(Relative::class);
+    }
 }
 
 

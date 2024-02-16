@@ -131,7 +131,10 @@
 										<li><a href="{{route('categories.index')}}" class="nav-link text-white sidebarlinks"><i
 											class="fas fa-long-arrow-alt-right me-4"></i>Category</a></li>
 										<li><a href="{{route('statuses.index')}}" class="nav-link text-white sidebarlinks">
-											<i class="fas fa-long-arrow-alt-right me-4"></i>Status</a></li>									
+											<i class="fas fa-long-arrow-alt-right me-4"></i>Status</a></li>	
+											
+										<li><a href="{{route('relatives.index')}}" class="nav-link text-white sidebarlinks">
+											<i class="fas fa-long-arrow-alt-right me-4"></i>Relative</a></li>	
 									</ul>
 
 								</li>

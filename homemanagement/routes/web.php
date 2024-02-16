@@ -4,6 +4,8 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DailycostsController;
 use App\Http\Controllers\ProfileController;
+
+use App\Http\Controllers\RelativeController;
 use App\Http\Controllers\StatusesController;
 use App\Http\Controllers\TrashController;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +42,10 @@ Route::middleware('auth')->group(function () {
 
 
     Route::resource('/dailycosts', DailycostsController::class);
+    Route::resource('/relatives', RelativeController::class);
+
+
+
     Route::resource('/statuses', StatusesController::class);
     Route::resource('/trashes', TrashController::class);
     Route::get('/trashesrestore/{id}', [TrashController::class, 'restore'])->name('trashes.restore');

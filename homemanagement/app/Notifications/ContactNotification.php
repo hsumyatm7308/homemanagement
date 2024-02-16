@@ -38,7 +38,6 @@ class ContactNotification extends Notification
     {
         return (new MailMessage)
             ->line('Name : ' . $this->data['title'])
-            ->line('Phone number : ' . $this->data['number'])
             ->action('Notification Action', url('/'))
             ->line('You added one into contact!');
     }

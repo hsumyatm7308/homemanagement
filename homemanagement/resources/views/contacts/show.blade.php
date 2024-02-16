@@ -72,7 +72,7 @@
                                                 <div>Relative</div>
                                             </div>
                                             <div class="col-auto">
-                                                {{-- <div>{{$contact->relative->name}}</div> --}}
+                                                <div>{{$contact->relative->title}}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -222,29 +222,31 @@
                 
                             <div id="phone" class="tab-pane">
                                 <div class="py-3">
-                                    <form action="" method="POST" class="mt-3">
-                                        @csrf 
                                         <div class="row">
                                             <div class="col-1">
                                                 <div class="form-group">
                                                     <i class="fas fa-phone bg-white text-success p-3 fs-5"></i>
                                                 </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-6 phonenumbers mb-3">
                                                 <div class=" form-group mb-3">
-                                                    <input type="email" name="cmpemail" id="cmpemail" class="form-control form-control-sm border-0 rounded-0 px-4 py-3" placeholder="To:" value="{{$contact->number}}" readonly/>
+                                                    <input type="text" name="number" id="number" class="form-control form-control-sm border-0 rounded-0 px-4 py-3" placeholder="" value="{{$contact->number}}" readonly/>
                                                 </div> 
                                             </div>
 
 
                                             <div class="col-7 d-flex justify-content-end mb-3">
-                                                <button type="submit" class="btn btn-secondary btn rounded-0 me-3" rows="3" style="resize: none" >Edit</button>
-                                                <button type="submit" class="btn btn-primary btn rounded-0" rows="3" style="resize: none" >Add</button>
+                                                <button type="button" class="btn btn-secondary btn rounded-0 me-3 editbtn" rows="3" style="resize: none" >Edit</button>
+                                                <form action="{{route('contacts.store')}}" method="POST">
+                                                    @csrf
+                                                    <div class="add-btns">
+                                                        <button type="button" class="btn btn-primary btn rounded-0 " rows="3" style="resize: none" >Create</button>
+                                                    </div>
+                                                </form>
                                             </div>
                                             
                                         </div>
         
-                                    </form>
                                 </div>
                             </div>
                 
@@ -500,6 +502,43 @@ for (var i = 0; i < getacctitles.length; i++) {
 
 
 // end accodion 
+
+// start phone number 
+
+
+
+var addbtns = document.querySelectorAll('.add-btns');
+
+var html = `
+            <div class=" form-group mb-3">
+                <input type="text" name="title" id="title" class="form-control form-control-sm border-0 rounded-0 px-4 py-3" placeholder="" value="{{old('title')}}" />
+            </div>
+
+        `;
+
+addbtns.forEach((addbtn => {
+    addbtn.addEventListener('click',function(){
+        addbtn.removeEventListener('click', arguments.callee);
+
+        var phonenumbers = document.querySelector('.phonenumbers');
+        var createle = document.createElement('div');
+        createle.innerHTML = html;
+
+        phonenumbers.append(createle);
+
+
+        var editbtn = document.querySelector('.editbtn');
+        this.innerHTML = `
+             <button type="submit" class="btn btn-primary btn rounded-0 add-btns" rows="3" style="resize: none" >Create</button>
+        
+        `;
+        editbtn.innerHTML = "Cancle";
+
+
+
+    })
+}))
+// end phone number 
     </script>
 @endsection
 
