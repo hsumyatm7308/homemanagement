@@ -119,10 +119,11 @@ class ContactsController extends Controller
     }
 
 
-    public function mailbox(Request $request, string $id)
+    public function mailbox(Request $request, $id)
     {
 
         $contact = Contact::findOrFail($id);
+        // dd($contact);
         $to = $request['cmpemail'];
         $subject = $request['cmpsubject'];
         $content = $request['cmpcontent'];

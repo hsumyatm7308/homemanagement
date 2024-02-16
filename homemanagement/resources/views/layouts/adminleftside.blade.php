@@ -81,12 +81,12 @@
 
 								<li class="nav-item"><a href="javascript:void(0);"
 										class="nav-link text-white p-3 mb-2 sidebarlinks" data-bs-target="#advanceui"
-										data-bs-toggle="collapse"><i class="fas fa-file-alt fa-lg me-3"></i>Advance UI<i
+										data-bs-toggle="collapse"><i class="fas fa-file-alt fa-lg me-3"></i>Members<i
 											class="fas fa-angle-left mores"></i></a>
 
 									<ul id="advanceui" class="collapse ps-2">
-										<li><a href="javascript:void(0);" class="nav-link text-white sidebarlinks"><i
-													class="fas fa-long-arrow-alt-right me-4"></i>Clipboard</a></li>
+										<li><a href="javascript:void(0);" class="nav-link text-white sidebarlinks"><i class="fas fa-user-alt me-4"></i>All members</a></li>
+
 										<li><a href="javascript:void(0);" class="nav-link text-white sidebarlinks"><i
 													class="fas fa-long-arrow-alt-right me-4"></i>Sliders</a></li>
 										<li><a href="javascript:void(0);" class="nav-link text-white sidebarlinks"><i
@@ -104,12 +104,11 @@
 
 								<li class="nav-item"><a href="javascript:void(0);"
 										class="nav-link text-white p-3 mb-2 sidebarlinks" data-bs-target="#iconselement"
-										data-bs-toggle="collapse"><i class="fas fa-file-alt fa-lg me-3"></i>Members<i
+										data-bs-toggle="collapse"><i class="fas fa-file-alt fa-lg me-3"></i>App<i
 											class="fas fa-angle-left mores"></i></a>
 
 									<ul id="iconselement" class="collapse ps-2">
-										<li><a href="javascript:void(0);" class="nav-link text-white sidebarlinks"><i class="fas fa-user-alt me-4"></i>All members</a></li>
-													<li><a href="{{route('contacts.index')}}" class="nav-link text-white sidebarlinks"><i class="fas fa-address-book me-4"></i>Contact</a></li>
+										<li><a href="{{route('contacts.index')}}" class="nav-link text-white sidebarlinks"><i class="fas fa-address-book me-4"></i>Contact</a></li>
 								
 									</ul>
 

@@ -24,7 +24,7 @@
 
 <body>
     <section>
-        <b>Dear {{$contact->name}}</b>
+        <b>Dear {{$contact->title}}</b>
     </section>
     <section>
         <div class="card">

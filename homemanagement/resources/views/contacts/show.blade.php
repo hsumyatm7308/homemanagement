@@ -52,6 +52,23 @@
                                     <div class="col ps-3">
                                         <div class="row">
                                             <div class="col">
+                                                <div>Birthday</div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <div>{{$contact->birthday}}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+
+                                <div class="row g-0 mb-2">
+                                    <div class="col-auto">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="col ps-3">
+                                        <div class="row">
+                                            <div class="col">
                                                 <div>Relative</div>
                                             </div>
                                             <div class="col-auto">
@@ -113,11 +130,22 @@
                                     </div>
                                 </div>
 
+
+
+
+               
+                                
+
                             </div>
 
                         </div>
 
                     </div>
+
+
+
+
+         
 
                 </div>
 
@@ -130,7 +158,7 @@
                                 <h1 class="acctitle shown">Email</h1>
                                 <div class="acccontent">
                                     <div class="col-md-12">
-                                        <form action="{{route('contacts.mailbox',$contact->id)}}" method="POST" class="mt-3">
+                                        <form action="{{route('contacts.mailbox',['id' =>$contact->id])}}" method="POST" class="mt-3">
                                             @csrf 
                                             <div class="row">
                                                 <div class="col-md-6 form-group mb-3">
@@ -174,11 +202,11 @@
 
                         <ul class="nav">
                             <li class="nav-item">
-                                <button type="button" id="autoclick" class="tablinks" onclick="gettab(event, 'follower')">Follower</button>
+                                <button type="button" id="autoclick" class="tablinks" onclick="gettab(event, 'phone')">Phone</button>
                             </li>
                 
                             <li class="nav-item">
-                                <button type="button" class="tablinks" onclick="gettab(event, 'following')">Following</button>
+                                <button type="button" class="tablinks" onclick="gettab(event, 'social')">Social</button>
                             </li>
                 
                             <li class="nav-item">
@@ -192,21 +220,35 @@
                 
                         <div class="tab-content">
                 
-                            <div id="follower" class="tab-pane">
-                                <h3>This is Home information</h3>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                                    industry's standard
-                                    dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
-                                    make a type specimen
-                                    book. It has survived not only five centuries, but also the leap into electronic typesetting,
-                                    remaining essentially
-                                    unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem
-                                    Ipsum passages, and more
-                                    recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                                </p>
+                            <div id="phone" class="tab-pane">
+                                <div class="py-3">
+                                    <form action="" method="POST" class="mt-3">
+                                        @csrf 
+                                        <div class="row">
+                                            <div class="col-1">
+                                                <div class="form-group">
+                                                    <i class="fas fa-phone bg-white text-success p-3 fs-5"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class=" form-group mb-3">
+                                                    <input type="email" name="cmpemail" id="cmpemail" class="form-control form-control-sm border-0 rounded-0 px-4 py-3" placeholder="To:" value="{{$contact->number}}" readonly/>
+                                                </div> 
+                                            </div>
+
+
+                                            <div class="col-7 d-flex justify-content-end mb-3">
+                                                <button type="submit" class="btn btn-secondary btn rounded-0 me-3" rows="3" style="resize: none" >Edit</button>
+                                                <button type="submit" class="btn btn-primary btn rounded-0" rows="3" style="resize: none" >Add</button>
+                                            </div>
+                                            
+                                        </div>
+        
+                                    </form>
+                                </div>
                             </div>
                 
-                            <div id="following" class="tab-pane">
+                            <div id="social" class="tab-pane">
                                 <h3>This is Profile information</h3>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
                                     industry's standard
@@ -318,10 +360,12 @@
 
         .tab-content {
             background-color: #ccc;
+
         }
 
         .tab-pane {
-            padding: 5px 15px;
+            padding: 10px 15px;
+            background-color: #ccc;
 
             display: none;
         }
