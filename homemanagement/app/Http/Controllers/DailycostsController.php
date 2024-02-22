@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Dailycost;
+use App\Models\Duration;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,25 +23,28 @@ class DailycostsController extends Controller
                 $query->where('name', 'LIKE', '%' . $getname . '%');
 
             }
+
+
         })->orderBy('id', 'desc')->paginate(10);
 
+        $data['durations'] = Duration::pluck('title', 'slug')->prepend('Choose Duration', '');
 
 
         if ($request->has('filter')) {
             $filter = $request->input('filter');
 
             switch ($filter) {
-                case "lastweek":
+                case "last-week":
                     $start = Carbon::now()->startOfWeek()->subWeek();
                     $end = Carbon::now()->endOfWeek()->subWeek();
                     break;
 
-                case "lastmonth":
+                case "last-month":
                     $start = Carbon::now()->startOfMonth()->subMonth();
                     $end = Carbon::now()->endOfMonth()->subMonth();
                     break;
 
-                case "last3months":
+                case "last-3month":
                     $start = Carbon::now()->startOfMonth()->subMonths(2);
                     $end = Carbon::now()->endOfMonth();
                     break;

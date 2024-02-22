@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\DailycostsController;
+use App\Http\Controllers\DurationsController;
 use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\RelativeController;
@@ -42,6 +43,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::resource('/dailycosts', DailycostsController::class);
+    Route::resource('/durations', DurationsController::class);
     Route::resource('/relatives', RelativeController::class);
 
 

@@ -135,6 +135,9 @@
 											
 										<li><a href="{{route('relatives.index')}}" class="nav-link text-white sidebarlinks">
 											<i class="fas fa-long-arrow-alt-right me-4"></i>Relative</a></li>	
+												
+										<li><a href="{{route('durations.index')}}" class="nav-link text-white sidebarlinks">
+											<i class="fas fa-long-arrow-alt-right me-4"></i>Duration</a></li>	
 									</ul>
 
 								</li>

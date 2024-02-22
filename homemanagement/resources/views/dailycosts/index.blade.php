@@ -20,12 +20,13 @@
         <div>
           <form action="" class="d-flex justify-content-center align-items-center">
             <div class="input-group me-3">
-                <select name="duration" id="duration" class="border-info form-control form-control-sm rounded-0 duration">
-                    <option value="">Choose duration</option>
-                    <option value="lastweek" class="lastweek">Last Week</option>
-                    <option value="lastmonth">Last Month</option>
-                    <option value="last3months">Last 3 Months</option>
-                </select>
+              <select name="filter" id="filter" class="form-control form-control-sm rounded-0">
+                @foreach($durations as $slug => $name)
+                <option value="{{$slug}}" {{$slug == request('filter') ? "selected" : ""}}>{{$name}}</option>                              
+
+  
+                @endforeach
+            </select>
             </div>
 
             <div class="input-group">
@@ -180,13 +181,11 @@
 
   });
 
-
-    // Start Duration 
-    document.getElementById('duration').addEventListener('click',function(){
-      var getfilterid = this.value;
-      window.location.href = window.location.href.split('?')[0] + "?filter="+getfilterid 
-      
-    });
+  //   Start Filter 
+  document.getElementById('filter').addEventListener('click',function(){
+      let getfilterid = this.value || this.options[this.selectedIndex].value;
+      window.location.href = window.location.href.split('?')[0] + '?filter='+getfilterid
+    })
 
 
 
