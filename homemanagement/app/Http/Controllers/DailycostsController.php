@@ -15,7 +15,16 @@ class DailycostsController extends Controller
     //
     public function index(Request $request)
     {
-        $data['dailycosts'] = Dailycost::orderBy('id', 'desc')->paginate(10);
+        // $data['dailycosts'] = Dailycost::orderBy('id', 'desc')->paginate(10);
+
+        $data['dailycosts'] = Dailycost::where(function ($query) {
+            if ($getname = request('filtername')) {
+                $query->where('name', 'LIKE', '%' . $getname . '%');
+
+            }
+        })->orderBy('id', 'desc')->paginate(10);
+
+
 
         if ($request->has('filter')) {
             $filter = $request->input('filter');

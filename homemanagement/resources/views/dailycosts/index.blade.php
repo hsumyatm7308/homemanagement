@@ -18,15 +18,21 @@
         </div>
        
         <div>
-          <form action="">
-            <div class="form-group">
+          <form action="" class="d-flex justify-content-center align-items-center">
+            <div class="input-group me-3">
                 <select name="duration" id="duration" class="border-info form-control form-control-sm rounded-0 duration">
                     <option value="">Choose duration</option>
-                    <option value="lastweek" class="lastweek"></option>
+                    <option value="lastweek" class="lastweek">Last Week</option>
                     <option value="lastmonth">Last Month</option>
                     <option value="last3months">Last 3 Months</option>
                 </select>
             </div>
+
+            <div class="input-group">
+              <input type="text" name="filtername" id="filtername" class="form-control form-control-sm rounded-0" placeholder="Search" value="{{request('filtername')}}">
+              <button type="button" id="btn-search" class="btn btn-secondary btn-sm"><i class="fas fa-search"></i></button>
+
+          </div>
 
         </form>
         
@@ -180,7 +186,22 @@
       var getfilterid = this.value;
       window.location.href = window.location.href.split('?')[0] + "?filter="+getfilterid 
       
-    })
+    });
+
+
+
+    //   Start Filter 
+  const getfilterbtn = document.getElementById('btn-search');
+  getfilterbtn.addEventListener('click',function(e){
+    // console.log('hi')
+    const getfiltername = document.getElementById('filtername').value;
+    const getcururl = window.location.href;
+
+    window.location.href = getcururl.split('?')[0] + '?filtername='+getfiltername;
+    console.log(getfiltername)
+    e.preventDefault();
+  });
+// End Filter 
     // End Duration 
 
 
