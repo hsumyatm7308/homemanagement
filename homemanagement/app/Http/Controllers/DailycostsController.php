@@ -27,24 +27,23 @@ class DailycostsController extends Controller
 
         })->orderBy('id', 'desc')->paginate(10);
 
-        $data['durations'] = Duration::pluck('title', 'slug')->prepend('Choose Duration', '');
 
 
         if ($request->has('filter')) {
             $filter = $request->input('filter');
 
             switch ($filter) {
-                case "last-week":
+                case "lastweek":
                     $start = Carbon::now()->startOfWeek()->subWeek();
                     $end = Carbon::now()->endOfWeek()->subWeek();
                     break;
 
-                case "last-month":
+                case "lastmonth":
                     $start = Carbon::now()->startOfMonth()->subMonth();
                     $end = Carbon::now()->endOfMonth()->subMonth();
                     break;
 
-                case "last-3month":
+                case "last-3-month":
                     $start = Carbon::now()->startOfMonth()->subMonths(2);
                     $end = Carbon::now()->endOfMonth();
                     break;

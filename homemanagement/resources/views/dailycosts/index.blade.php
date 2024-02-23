@@ -18,14 +18,34 @@
         </div>
        
         <div>
+          <p> {{Request::getRequestUri()}}</p>
+
+          <p>
+
+            
+
+
+          </p>
+
+
+
+
+
           <form action="" class="d-flex justify-content-center align-items-center">
             <div class="input-group me-3">
               <select name="filter" id="filter" class="form-control form-control-sm rounded-0">
-                @foreach($durations as $slug => $name)
-                <option value="{{$slug}}" {{$slug == request('filter') ? "selected" : ""}}>{{$name}}</option>                              
+                {{-- @foreach($durations as $slug => $name)
+                <option value="{{$slug}}" {{$slug == request('filter') ? "selected" : ""}}>{{$name}}</option>  
+                
+
 
   
-                @endforeach
+                @endforeach --}}
+                
+                <option value="">Choose duration</option>
+                <option value="lastweek" {{request('filter') == 'lastweek' ? "selected" : "" }}>Last Week</option>
+                <option value="lastmonth"  {{ request('filter') == 'lastmonth' ? "selected" : "" }}>Last Month</option>
+                <option value="last-3-month" {{request('filter') == 'last-3-month' ? "selected" : "" }}>Last 3 Month</option>
             </select>
             </div>
 
