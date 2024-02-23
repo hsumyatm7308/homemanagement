@@ -25,15 +25,21 @@
         </div>
        
         <div>
-          <form action="">
-            <div class="form-group">
-                <select name="duration" id="duration" class="border-info form-control form-control-sm rounded-0 duration">
-                    <option value="">Choose duration</option>
-                    <option value="lastweek" class="lastweek"></option>
-                    <option value="lastmonth">Last Month</option>
-                    <option value="last3months">Last 3 Months</option>
-                </select>
+          <form action="" class="d-flex justify-content-center align-items-center">
+            <div class="input-group me-3">
+              <select name="filter" id="filter" class="form-control form-control-sm rounded-0">
+                <option value="">Choose duration</option>
+                <option value="lastweek" {{request('filter') == 'lastweek' ? "selected" : "" }}>Last Week</option>
+                <option value="lastmonth"  {{ request('filter') == 'lastmonth' ? "selected" : "" }}>Last Month</option>
+                <option value="last3month" {{request('filter') == 'last3month' ? "selected" : "" }}>Last 3 Month</option>
+            </select>
             </div>
+
+            <div class="input-group">
+              <input type="text" name="filtername" id="filtername" class="form-control form-control-sm rounded-0" placeholder="Search" value="{{request('filtername')}}">
+              <button type="button" id="btn-search" class="btn btn-secondary btn-sm"><i class="fas fa-search"></i></button>
+
+          </div>
 
         </form>
         
@@ -115,11 +121,12 @@
 
        
 
-      <div class="d-flex justify-content-end mt-5">
+      {{-- <div class="d-flex justify-content-end mt-5">
         {{ $trashes->appends(request()->only('filter'))->links('pagination::default') }}
      </div>
-    
-     
+     --}}
+   
+  
       {{-- php artisan vendor:publish --tag=laravel-pagination --}}
 
 
@@ -194,14 +201,28 @@
   });
 
 
-    // Start Duration 
-    document.getElementById('duration').addEventListener('click',function(){
-      var getfilterid = this.value;
-      window.location.href = window.location.href.split('?')[0] + "?filter="+getfilterid 
-      
+ 
+  //   Start Filter 
+  document.getElementById('filter').addEventListener('click',function(){
+      let getfilterid = this.value || this.options[this.selectedIndex].value;
+      window.location.href = window.location.href.split('?')[0] + '?filter='+getfilterid
     })
-    // End Duration 
 
+
+
+    //   Start Filter 
+  const getfilterbtn = document.getElementById('btn-search');
+  getfilterbtn.addEventListener('click',function(e){
+    // console.log('hi')
+    const getfiltername = document.getElementById('filtername').value;
+    const getcururl = window.location.href;
+
+    window.location.href = getcururl.split('?')[0] + '?filtername='+getfiltername;
+    console.log(getfiltername)
+    e.preventDefault();
+  });
+// End Filter 
+    // End Duration 
 
 
 </script>

@@ -2,18 +2,60 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use App\Models\Dailycost;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+
 
 class TrashController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $trashes = Dailycost::onlyTrashed()->paginate(20);
-        // dd($trashes);
-        return view('trashes.index', compact('trashes'));
+        $data['dailycosttrashes'] = Dailycost::onlyTrashed()->get();
+        $data["contacttrashes"] = Contact::onlyTrashed()->get();
 
+        // Merge the trashed records
+        $data["trashes"] = $data['dailycosttrashes']->merge($data["contacttrashes"]);
+
+
+        if ($request->has('filter')) {
+            $filter = $request->input('filter');
+
+            switch ($filter) {
+                case "lastweek":
+                    $start = Carbon::now()->startOfWeek()->subWeek();
+                    $end = Carbon::now()->endOfWeek()->subWeek();
+                    break;
+
+                case "lastmonth":
+                    $start = Carbon::now()->startOfMonth()->subMonth();
+                    $end = Carbon::now()->endOfMonth()->subMonth();
+                    break;
+
+                case "last3month":
+                    $start = Carbon::now()->startOfMonth()->subMonths(2);
+                    $end = Carbon::now()->endOfMonth();
+                    break;
+                default:
+                    $start = null;
+                    $end = null;
+
+
+            }
+
+            if ($start && $end) {
+                // Filter the merged collection
+                $data['trashes'] = $data['trashes']->filter(function ($item) use ($start, $end) {
+                    return $item->created_at->between($start, $end);
+                });
+            }
+        }
+
+        return view('trashes.index', $data);
     }
+
 
 
 
@@ -36,7 +78,12 @@ class TrashController extends Controller
 
     public function destoryall()
     {
-        $trash = Dailycost::onlyTrashed()->get();
+        $data['dailycosttrashes'] = Dailycost::onlyTrashed()->get();
+        $data["contacttrashes"] = Contact::onlyTrashed()->get();
+
+        // Merge the trashed records
+        $trash = $data['dailycosttrashes']->merge($data["contacttrashes"]);
+
         foreach ($trash as $item) {
             $item->forceDelete();
         }
