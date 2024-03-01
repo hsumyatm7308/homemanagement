@@ -20,7 +20,7 @@ class RelativeController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required|max:50|unique:relatives',
+            'name' => 'required|max:50|unique:relatives',
 
         ]);
 
@@ -29,8 +29,8 @@ class RelativeController extends Controller
 
         $relative = new Relative();
 
-        $relative->title = $request['title'];
-        $relative->slug = Str::slug($request['title']);
+        $relative->name = $request['name'];
+        $relative->slug = Str::slug($request['name']);
         $relative->user_id = $user_id;
 
 

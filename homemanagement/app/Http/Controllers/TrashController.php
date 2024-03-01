@@ -60,6 +60,24 @@ class TrashController extends Controller
 
 
 
+    public function show(string $id)
+    {
+
+
+        // dd($modelName);
+
+        $data['dailycost'] = Dailycost::onlyTrashed()->where('id', $id)->firstOrFail();
+
+
+
+
+        return view('trashes.show', $data);
+    }
+
+
+
+
+
     public function destroy(string $id)
     {
         $trash = Dailycost::onlyTrashed()->findOrFail($id);

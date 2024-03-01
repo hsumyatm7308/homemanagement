@@ -26,31 +26,31 @@
         </thead>
         <tbody>
             
-            @foreach($contacts as $idx=>$contact)
+            @foreach($trashes as $idx=>$trash)
             <tr>
                 <td>{{++$idx}}</td>
                
 
-                <td><a href="{{route('contacts.show',$contact->id)}}"> {{$contact['name']}}</a></td>
+                <td><a href="{{route('trashes.show',$trash->id)}}"> {{$trash['name']}}</a></td>
                 <td>
                     <div>
                         <div class="form-check form-switch">
-                            <input type="checkbox" class="form-check-input change-btn" {{ $contact->status_id === 1 ? 'checked' : ''}}  data-id="{{$contact->id}}" />
+                            <input type="checkbox" class="form-check-input change-btn" {{ $trash->status_id === 1 ? 'checked' : ''}}  data-id="{{$trash->id}}" />
                         </div>
                     </div>
                 </td>
-                <td>{{$contact->relative->name}}</td>
-                <td>{{$contact->user['name']}}</td>
-                <td>{{$contact->created_at->format('d-M-Y')}}</td>
-                <td>{{$contact->updated_at->format('d-M-Y')}}</td>
+                <td>{{$trash->relative->name}}</td>
+                <td>{{$trash->user['name']}}</td>
+                <td>{{$trash->created_at->format('d-M-Y')}}</td>
+                <td>{{$trash->updated_at->format('d-M-Y')}}</td>
                
                 <td>
-                    <a href="javascript:void(0);" class="text-primary me-3 editform" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="{{$contact->id}}" data-title="{{$contact->name}}" data-birthday="{{$contact->birthday}}"   data-relative="{{$contact->relative_id}}" data-status="{{$contact->status_id}}">Edit</a>
+                    <a href="javascript:void(0);" class="text-primary me-3 editform" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="{{$trash->id}}" data-title="{{$trash->name}}" data-birthday="{{$trash->birthday}}"   data-relative="{{$trash->relative_id}}" data-status="{{$trash->status_id}}">Edit</a>
                     
-                    <button type="button" class="btn btn-sm btn-danger px-3 deleteform" data-bs-toggle="modal" data-bs-target="#deletemodal" data-id = "{{$contact->id}}">Del</button>
+                    <a href="{{route('trashes.restore',$trash->id)}}"><button class="text-white btn btn-sm btn-secondary px-3">Restore</button></a>
                 </td>
   
-                <form id="formdelete-{{$contact->id}}" action="{{route('contacts.destroy',$contact -> id)}}" method="POST">
+                <form id="formdelete-{{$trash->id}}" action="{{route('trashes.destroy',$trash -> id)}}" method="POST">
                   @csrf 
                   @method('DELETE')
                  
@@ -79,7 +79,7 @@
             </div>
 
             <div class="modal-body">
-                <form id="{{route('contacts.store')}}" action="" method="POST" enctype="multipart/form-data">
+                <form id="{{route('trashes.store')}}" action="" method="POST" enctype="multipart/form-data">
        
                     {{csrf_field()}}
 
@@ -148,7 +148,7 @@
 
             <div class="modal-header">
                 <h6 class="modal-title">Edit Form</h6>
-                <button type="contact" class="btn-close" data-bs-dismiss="modal"></button>
+                <button type="trash" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
 
             <div class="modal-body">
@@ -258,7 +258,7 @@ $(document).ready(function(){
 
             const getid = $(this).attr('data-id');
                     
-            $("#formaction").attr("action",`/contacts/${getid}`);
+            $("#formaction").attr("action",`/trashes/${getid}`);
 
             e.preventDefault();
         });
@@ -288,13 +288,13 @@ $(document).ready(function(){
 
             let getid = $(this).attr('data-id');
 
-            let contactstatus = $(this).prop('checked') ? 1 : 2 ;
+            let trashestatus = $(this).prop('checked') ? 1 : 2 ;
 
             $.ajax({
-                url : "contactstatus",
+                url : "trashestatus",
                 method : "GET",
                 dataType: "json",
-                data : {"id" : getid ,"status_id" : contactstatus},
+                data : {"id" : getid ,"status_id" : trashestatus},
 
                 success: function(response){
                     console.log(response.success);

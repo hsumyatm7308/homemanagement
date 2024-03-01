@@ -185,5 +185,21 @@ class DailycostsController extends Controller
         return redirect()->back();
     }
 
+    public function trashindex()
+    {
+        $data['trashes'] = Dailycost::onlyTrashed()->get();
+
+        return view('dailycosts.trash', $data);
+    }
+
+
+    public function restore(string $id)
+    {
+        $trash = Dailycost::onlyTrashed()->findOrFail($id);
+        $trash->restore();
+
+        session()->flash('success', 'Restore Successfully');
+        return redirect()->back();
+    }
 
 }

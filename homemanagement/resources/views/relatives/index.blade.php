@@ -28,7 +28,7 @@
                 <td>{{++$idx}}</td>
                
 
-                <td>{{$relative['title']}}</td>
+                <td>{{$relative['name']}}</td>
              
                 <td>{{$relative->user['name']}}</td>
                 <td>{{$relative->created_at->format('d-M-Y')}}</td>
@@ -75,9 +75,9 @@
 
                    <div class="row align-items-end">
                        <div class="col-md-7 form-group">
-                           <label for="title"> Name <span class="text-danger">*</span></label>
+                           <label for="name"> Name <span class="text-danger">*</span></label>
 
-                           <input type="text" name="title" id="title" class="form-control form-control-sm rounded-0" placeholder="Enter your name" value="{{old('title')}}" />
+                           <input type="text" name="name" id="name" class="form-control form-control-sm rounded-0" placeholder="Enter your name" value="{{old('title')}}" />
                        </div>
 
                    
@@ -115,7 +115,7 @@
                        <div class="col-md-7 form-group">
                            <label for="editname"> Name <span class="text-danger">*</span></label>
 
-                           <input type="text" name="title" id="editname" class="form-control form-control-sm rounded-0" />
+                           <input type="text" name="name" id="editname" class="form-control form-control-sm rounded-0" />
                        </div>
 
                

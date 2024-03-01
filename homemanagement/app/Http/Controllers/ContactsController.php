@@ -27,7 +27,7 @@ class ContactsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required|max:50|unique:contacts',
+            'name' => 'required|max:50|unique:contacts',
             'status_id' => 'required|in:1,2',
             'birthday' => 'nullable',
             'relative_id' => 'nullable'
@@ -38,8 +38,8 @@ class ContactsController extends Controller
 
         $contact = new Contact();
 
-        $contact->title = $request['title'];
-        $contact->slug = Str::slug($request['title']);
+        $contact->name = $request['name'];
+        $contact->slug = Str::slug($request['name']);
         $contact->status_id = $request['status_id'];
         $contact->relative_id = $request['relative_id'];
         $contact->birthday = $request['birthday'];
@@ -60,7 +60,7 @@ class ContactsController extends Controller
     public function update(Request $request, string $id)
     {
         $this->validate($request, [
-            'title' => ['required', 'max:50'],
+            'name' => ['required', 'max:50'],
             'status_id' => ['required', 'in:1,2'],
             'birthday' => 'nullable',
             'relative_id' => 'nullable'
@@ -71,8 +71,8 @@ class ContactsController extends Controller
 
         $contact = Contact::findOrFail($id);
 
-        $contact->title = $request['title'];
-        $contact->slug = Str::slug($request['title']);
+        $contact->title = $request['name'];
+        $contact->slug = Str::slug($request['name']);
         $contact->status_id = $request['status_id'];
         $contact->relative_id = $request['relative_id'];
         $contact->birthday = $request['birthday'];
@@ -125,7 +125,13 @@ class ContactsController extends Controller
         return redirect()->back();
     }
 
-
+    public function trashindex()
+    {
+        $trashes = Contact::onlyTrashed()->get();
+        $statuses = Status::whereIn('id', [1, 2])->get();
+        $relatives = Relative::all();
+        return view('contacts.trash', compact('trashes', 'statuses', 'relatives'));
+    }
 
 
 }

@@ -13,7 +13,7 @@ class Relative extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'title',
+        'name',
         'slug',
         'user_id'
 
