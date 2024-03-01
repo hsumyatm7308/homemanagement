@@ -83,7 +83,8 @@
                     <td class="d-flex ">
                         <a href="{{route('trashes.edit',$trash->id)}}"><button
                                 class="text-primary btn btn-sm px-3">Edit</button></a>
-                        <a href="{{route('trashes.restore',$trash->id)}}"><button class="text-white btn btn-sm btn-secondary px-3">Restore</button></a>
+                        <a href="{{route('dailycosts.restore',$trash->id)}}"><button class="text-white btn btn-sm btn-secondary px-3">Restore</button></a>
+              
 
                     </td>
 

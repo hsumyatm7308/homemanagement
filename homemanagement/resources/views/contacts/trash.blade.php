@@ -7,7 +7,6 @@
     <div class="container-fluid mt-5">
         <div class="col-md-12"> 
 
-            <a href="#createmodal" class="btn btn-primary btn-sm rounded-0" data-bs-toggle="modal">Create</a>
 
 
         <table id="mytable" class="mydata table table-striped table-hover border mt-5">
@@ -47,7 +46,7 @@
                 <td>
                     <a href="javascript:void(0);" class="text-primary me-3 editform" data-bs-toggle="modal" data-bs-target="#editmodal" data-id="{{$trash->id}}" data-title="{{$trash->name}}" data-birthday="{{$trash->birthday}}"   data-relative="{{$trash->relative_id}}" data-status="{{$trash->status_id}}">Edit</a>
                     
-                    <a href="{{route('trashes.restore',$trash->id)}}"><button class="text-white btn btn-sm btn-secondary px-3">Restore</button></a>
+                    <a href="{{route('contacts.restore',$trash->id)}}"><button class="text-white btn btn-sm btn-secondary px-3">Restore</button></a>
                 </td>
   
                 <form id="formdelete-{{$trash->id}}" action="{{route('trashes.destroy',$trash -> id)}}" method="POST">

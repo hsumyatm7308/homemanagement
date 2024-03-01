@@ -2,13 +2,30 @@
 @extends('layouts.adminindex')
 
 @section('content')
-<div>
- <a href="{{route('dailycosts.transindex')}}"> dailycost</a>
-</div>
+
+@if($dailycosttrashes->count() > 0)
+
+<div class="d-flex ">
+  <div class="border p-3 mt-5 me-5" style="width:100px;">
+    <a href="{{route('dailycosts.transindex')}}" class="fs-6"> dailycost</a>
+  </div>
+
+  @else
 
 
-<div>
- <a href="{{route('contacts.transindex')}}">contact</a>
+@endif
+
+  
+@if($contacttrashes->count() > 0)
+  <div class="border p-3 mt-5 me-5" style="width:100px;">
+      <a href="{{ route('contacts.transindex') }}" class="fs-6">contact</a>
+  </div>
+@endif
+
+
+
+
+
 </div>
 @endsection
 

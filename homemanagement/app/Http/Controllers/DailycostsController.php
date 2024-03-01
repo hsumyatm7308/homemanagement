@@ -198,8 +198,19 @@ class DailycostsController extends Controller
         $trash = Dailycost::onlyTrashed()->findOrFail($id);
         $trash->restore();
 
+
+        $trashcount = Dailycost::onlyTrashed()->count();
+
+        // dd($trashcount);
+
         session()->flash('success', 'Restore Successfully');
-        return redirect()->back();
+
+        if ($trashcount > 0) {
+            return redirect()->back();
+
+        } else {
+            return redirect()->route('trashes.index');
+        }
     }
 
 }

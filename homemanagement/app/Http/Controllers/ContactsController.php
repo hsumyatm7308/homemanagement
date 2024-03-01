@@ -134,4 +134,24 @@ class ContactsController extends Controller
     }
 
 
+    public function restore(string $id)
+    {
+        $trash = Contact::onlyTrashed()->findOrFail($id);
+        $trash->restore();
+
+
+        $trashcount = Contact::onlyTrashed()->count();
+
+        // dd($trashcount);
+
+        session()->flash('success', 'Restore Successfully');
+
+        if ($trashcount > 0) {
+            return redirect()->back();
+
+        } else {
+            return redirect()->route('trashes.index');
+        }
+    }
+
 }

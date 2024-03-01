@@ -17,43 +17,46 @@ class TrashController extends Controller
         $data["contacttrashes"] = Contact::onlyTrashed()->get();
 
         // Merge the trashed records
-        $data["trashes"] = $data['dailycosttrashes']->merge($data["contacttrashes"]);
+        // $data["trashes"] = $data['dailycosttrashes']->merge($data["contacttrashes"]);
 
 
-        if ($request->has('filter')) {
-            $filter = $request->input('filter');
+        // if ($request->has('filter')) {
+        //     $filter = $request->input('filter');
 
-            switch ($filter) {
-                case "lastweek":
-                    $start = Carbon::now()->startOfWeek()->subWeek();
-                    $end = Carbon::now()->endOfWeek()->subWeek();
-                    break;
+        //     switch ($filter) {
+        //         case "lastweek":
+        //             $start = Carbon::now()->startOfWeek()->subWeek();
+        //             $end = Carbon::now()->endOfWeek()->subWeek();
+        //             break;
 
-                case "lastmonth":
-                    $start = Carbon::now()->startOfMonth()->subMonth();
-                    $end = Carbon::now()->endOfMonth()->subMonth();
-                    break;
+        //         case "lastmonth":
+        //             $start = Carbon::now()->startOfMonth()->subMonth();
+        //             $end = Carbon::now()->endOfMonth()->subMonth();
+        //             break;
 
-                case "last3month":
-                    $start = Carbon::now()->startOfMonth()->subMonths(2);
-                    $end = Carbon::now()->endOfMonth();
-                    break;
-                default:
-                    $start = null;
-                    $end = null;
+        //         case "last3month":
+        //             $start = Carbon::now()->startOfMonth()->subMonths(2);
+        //             $end = Carbon::now()->endOfMonth();
+        //             break;
+        //         default:
+        //             $start = null;
+        //             $end = null;
 
 
-            }
+        //     }
 
-            if ($start && $end) {
-                // Filter the merged collection
-                $data['trashes'] = $data['trashes']->filter(function ($item) use ($start, $end) {
-                    return $item->created_at->between($start, $end);
-                });
-            }
-        }
+        //     if ($start && $end) {
+        //         // Filter the merged collection
+        //         $data['trashes'] = $data['trashes']->filter(function ($item) use ($start, $end) {
+        //             return $item->created_at->between($start, $end);
+        //         });
+        //     }
+        // }
 
+
+        // dd($data['dailycosttrashes']->count());
         return view('trashes.index', $data);
+
     }
 
 
@@ -85,14 +88,14 @@ class TrashController extends Controller
         return redirect()->back();
     }
 
-    public function restore(string $id)
-    {
-        $trash = Dailycost::onlyTrashed()->findOrFail($id);
-        $trash->restore();
+    // public function restore(string $id)
+    // {
+    //     $trash = Dailycost::onlyTrashed()->findOrFail($id);
+    //     $trash->restore();
 
-        session()->flash('success', 'Restore Successfully');
-        return redirect()->back();
-    }
+    //     session()->flash('success', 'Restore Successfully');
+    //     return redirect()->back();
+    // }
 
     public function destoryall()
     {

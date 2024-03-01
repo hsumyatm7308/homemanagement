@@ -39,14 +39,14 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('/contacts', ContactsController::class);
     Route::get('/contacttrash', [ContactsController::class, 'trashindex'])->name('contacts.transindex');
-    Route::get('/contacttrashrestore/{id}', [DailycostsController::class, 'restore'])->name('trashes.restore');
+    Route::get('/contacttrashrestore/{id}', [ContactsController::class, 'restore'])->name('contacts.restore');
 
     Route::post('compose/mailbox/{id}', [ContactsController::class, 'mailbox'])->name('contacts.mailbox');
 
 
     Route::resource('/dailycosts', DailycostsController::class);
     Route::get('/dailytrash', [DailycostsController::class, 'trashindex'])->name('dailycosts.transindex');
-    Route::get('/dailytrashrestore/{id}', [DailycostsController::class, 'restore'])->name('trashes.restore');
+    Route::get('/dailytrashrestore/{id}', [DailycostsController::class, 'restore'])->name('dailycosts.restore');
 
 
     Route::resource('/relatives', RelativeController::class);
