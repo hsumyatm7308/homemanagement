@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\ContactJob;
 use App\Mail\ContactMail;
 use App\Models\Contact;
+use App\Models\Phonenumber;
 use App\Models\Relative;
 use App\Models\Status;
 use App\Notifications\ContactNotification;
@@ -23,14 +25,24 @@ class ContactsController extends Controller
         return view('contacts.index', compact('contacts', 'statuses', 'relatives'));
     }
 
+    public function create()
+    {
+        $data['contacts'] = Contact::orderBy('name', 'asc')->get();
+        $data['statuses'] = Status::all();
+        $data['relatives'] = Relative::all()->pluck('name', 'id');
+        return view('contacts.create', $data);
+    }
+
 
     public function store(Request $request)
     {
         $this->validate($request, [
             'name' => 'required|max:50|unique:contacts',
+            'number' => 'required',
             'status_id' => 'required|in:1,2',
             'birthday' => 'nullable',
-            'relative_id' => 'nullable'
+            'relative_id' => 'nullable',
+
         ]);
 
         $user = Auth::user();
@@ -40,16 +52,26 @@ class ContactsController extends Controller
 
         $contact->name = $request['name'];
         $contact->slug = Str::slug($request['name']);
+        $contact->remark = $request['remark'];
         $contact->status_id = $request['status_id'];
         $contact->relative_id = $request['relative_id'];
         $contact->birthday = $request['birthday'];
         $contact->user_id = $user_id;
 
-
         $contact->save();
 
+
+        $phone = new Phonenumber();
+        $phone->number = $request['number'];
+        $phone->phonable_id = $contact->id;
+        $phone->phonable_type = get_class($contact);
+        $phone->user_id = $user_id;
+        $phone->save();
+
+
+
         $data = [
-            'title' => $request['title'],
+            'name' => $request['name'],
         ];
 
         Notification::send($user, new ContactNotification($data));
@@ -63,7 +85,7 @@ class ContactsController extends Controller
             'name' => ['required', 'max:50'],
             'status_id' => ['required', 'in:1,2'],
             'birthday' => 'nullable',
-            'relative_id' => 'nullable'
+            'relative_id' => 'nullable',
         ]);
 
         $user = Auth::user();
@@ -71,8 +93,9 @@ class ContactsController extends Controller
 
         $contact = Contact::findOrFail($id);
 
-        $contact->title = $request['name'];
+        $contact->name = $request['name'];
         $contact->slug = Str::slug($request['name']);
+        $contact->remark = $request['remark'];
         $contact->status_id = $request['status_id'];
         $contact->relative_id = $request['relative_id'];
         $contact->birthday = $request['birthday'];
@@ -113,17 +136,22 @@ class ContactsController extends Controller
 
     public function mailbox(Request $request, $id)
     {
-
         $contact = Contact::findOrFail($id);
-        // dd($contact);
-        $to = $request['cmpemail'];
-        $subject = $request['cmpsubject'];
-        $content = $request['cmpcontent'];
 
-        Mail::to($to)->send(new ContactMail($subject, $content, $contact));
+        $to = $request->input('cmpemail');
+        $subject = $request->input('cmpsubject');
+        $content = $request->input('cmpcontent');
+
+
+        $username = Auth::user()->name;
+
+
+        // dd($contact, $to, $subject, $content, $username);
+        Mail::to($to)->send(new ContactMail($subject, $content, $contact, $username));
 
         return redirect()->back();
     }
+
 
     public function trashindex()
     {

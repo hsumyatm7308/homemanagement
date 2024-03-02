@@ -36,8 +36,8 @@ class ContactNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        return (new MailMessage)
-            ->line('Name : ' . $this->data['title'])
+        return(new MailMessage)
+            ->line('Name : ' . $this->data['name'])
             ->action('Notification Action', url('/'))
             ->line('You added one into contact!');
     }

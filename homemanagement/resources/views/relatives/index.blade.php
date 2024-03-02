@@ -77,7 +77,7 @@
                        <div class="col-md-7 form-group">
                            <label for="name"> Name <span class="text-danger">*</span></label>
 
-                           <input type="text" name="name" id="name" class="form-control form-control-sm rounded-0" placeholder="Enter your name" value="{{old('title')}}" />
+                           <input type="text" name="name" id="name" class="form-control form-control-sm rounded-0" placeholder="Enter your name" value="{{old('name')}}" />
                        </div>
 
                    

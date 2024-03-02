@@ -14,9 +14,10 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('slug');
+            $table->text('remark')->nullable();
             $table->unsignedBigInteger('status_id');
-            $table->date('birthday');
-            $table->unsignedBigInteger('relative_id');
+            $table->date('birthday')->nullable();
+            $table->unsignedBigInteger('relative_id')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->softDeletes();
             $table->timestamps();

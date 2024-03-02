@@ -10,10 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('phnumbers', function (Blueprint $table) {
+        Schema::create('phonenumbers', function (Blueprint $table) {
             $table->id();
             $table->string('number');
-            $table->unsignedBigInteger('contact_id');
+            $table->unsignedBigInteger('phonable_id');
+            $table->string('phonable_type');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
@@ -24,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('phnumbers');
+        Schema::dropIfExists('phonenumbers');
     }
 };

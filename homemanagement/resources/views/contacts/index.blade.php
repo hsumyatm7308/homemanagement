@@ -7,7 +7,7 @@
     <div class="container-fluid mt-5">
         <div class="col-md-12"> 
 
-            <a href="#createmodal" class="btn btn-primary btn-sm rounded-0" data-bs-toggle="modal">Create</a>
+            <a href="{{route('contacts.create')}}" class="btn btn-primary btn-sm rounded-0" >Create</a>
 
 
         <table id="mytable" class="mydata table table-striped table-hover border mt-5">
@@ -69,7 +69,7 @@
 <!--End Page Content Area-->
 
  <!--Start create model-->
- <div id="createmodal" class="modal fade">
+ {{-- <div id="createmodal" class="modal fade">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content rounded-0">
 
@@ -138,7 +138,7 @@
 
         </div>
     </div>
-</div>
+</div> --}}
 <!--End create model-->
 
  <!--Start eidt model-->
@@ -161,7 +161,7 @@
                     <div class="col-md-6 form-group mt-2">
                         <label for="edittitle"> Name <span class="text-danger">*</span></label>
 
-                        <input type="text" name="name" id="edittitle" class="form-control form-control-sm rounded-0" placeholder="Enter your name" value="{{old('title')}}" />
+                        <input type="text" name="name" id="edittitle" class="form-control form-control-sm rounded-0" placeholder="Enter your name" value="{{old('name')}}" />
                     </div>
 
                  

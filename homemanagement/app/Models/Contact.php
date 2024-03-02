@@ -17,6 +17,7 @@ class Contact extends Model
     protected $fillable = [
         'name',
         'slug',
+        'remark',
         'number',
         'birthday_id',
         'status_id',
@@ -34,5 +35,10 @@ class Contact extends Model
     public function relative()
     {
         return $this->belongsTo(Relative::class);
+    }
+
+    public function phone()
+    {
+        return $this->morphMany(Phonenumber::class, 'phonable');
     }
 }

@@ -41,7 +41,7 @@ class RelativeController extends Controller
     public function update(Request $request, string $id)
     {
         $this->validate($request, [
-            'title' => ['required', 'max:50', 'unique:relatives,title,' . $id],
+            'name' => ['required', 'max:50', 'unique:relatives,name,' . $id],
         ]);
 
         $user = Auth::user();
@@ -49,8 +49,8 @@ class RelativeController extends Controller
 
         $relative = relative::findOrFail($id);
 
-        $relative->title = $request['title'];
-        $relative->slug = Str::slug($request['title']);
+        $relative->name = $request['name'];
+        $relative->slug = Str::slug($request['name']);
 
         $relative->user_id = $user_id;
 

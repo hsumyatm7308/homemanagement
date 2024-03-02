@@ -24,7 +24,7 @@
 
 <body>
     <section>
-        <b>Dear {{$contact->title}}</b>
+        <b>Dear {{$contact->name}}</b>
     </section>
     <section>
         <div class="card">
@@ -37,7 +37,8 @@
     <section>
         <ul class="list-unstyled">
             <li>Best Regards,</li>
-            <li>{{ auth()->user()->name }}</li>
+        
+            {{$username}}
         </ul>
     </section>
 </body>

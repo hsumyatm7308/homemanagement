@@ -9,18 +9,24 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ContactMail extends Mailable
+class ContactMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
+    use Queueable, SerializesModels;
+
     public $subject;
     public $content;
     public $contact;
 
-    public function __construct($subject, $content, $contact)
+    public $username;
+
+    public function __construct($subject, $content, $contact, $username)
     {
         $this->subject = $subject;
         $this->content = $content;
         $this->contact = $contact;
+        $this->username = $username;
+
     }
 
     public function build()
