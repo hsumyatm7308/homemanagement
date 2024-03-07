@@ -31,9 +31,9 @@
                         <div class="card-body">
 
                             <div class="d-flex flex-column align-items-center mb-3 mt-4">
-                                <div class="fw-bold h5 mb-2">{{$contact->title}}</div>
+                                <div class="fw-bold h5 mb-2">{{$contact->name}}</div>
                                 <div class="text-muted mb-4">
-                                    <span class="fw-semibold h6">{{$contact->number}}</span>
+                                    {{-- <span class="fw-semibold h6">{{$phone->number}}</span> --}}
                                 </div>
                                 <div style="width:200px; height:200px; background:#fcf2f2;">
                                     <img src="{{ asset($contact->image) }}" alt="{{ $contact->name }}" width="200" />
@@ -229,9 +229,13 @@
                                                 </div>
                                             </div>
                                             <div class="col-6 phonenumbers mb-3">
+                                                @foreach($phones as $phone)
+
                                                 <div class=" form-group mb-3">
-                                                    <input type="text" name="number" id="number" class="form-control form-control-sm border-0 rounded-0 px-4 py-3" placeholder="" value="{{$contact->number}}" readonly/>
+                                                    <input type="text" name="number" id="number" class="form-control form-control-sm border-0 rounded-0 px-4 py-3" placeholder="" value="{{$phone->number}}" readonly/>
                                                 </div> 
+                                                @endforeach
+
                                             </div>
 
 

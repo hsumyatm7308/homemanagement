@@ -112,7 +112,10 @@ class ContactsController extends Controller
     public function show(string $id)
     {
         $contact = Contact::findOrFail($id);
-        return view('contacts.show')->with("contact", $contact);
+        $phones = Phonenumber::where('user_id', $id)->where('phonable_type', 'App\Models\Contact')->get();
+
+        // dd($phones);
+        return view('contacts.show')->with("contact", $contact)->with('phones', $phones);
     }
 
 
